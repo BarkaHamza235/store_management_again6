@@ -1,0 +1,175 @@
+/* Store Manager - Styles personnalisés */
+
+:root {
+    --primary-color: #103cbe;
+    --secondary-color: #6c757d;
+    --success-color: #28a745;
+    --danger-color: #dc3545;
+    --warning-color: #ffc107;
+    --info-color: #17a2b8;
+    --glass-bg: rgba(255, 255, 255, 0.75);
+    --glass-border: rgba(209, 213, 219, 0.3);
+}
+
+/* Animations globales */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.fade-in {
+    animation: fadeIn 0.8s ease-in-out;
+}
+
+.slide-in {
+    animation: slideIn 0.6s ease-in-out;
+}
+
+/* Effet glassmorphism */
+.glass {
+    backdrop-filter: blur(16px) saturate(180%);
+    background: var(--glass-bg);
+    border-radius: 20px;
+    border: 1px solid var(--glass-border);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+}
+
+/* Boutons personnalisés */
+.btn-primary {
+    background: var(--primary-color);
+    border-color: var(--primary-color);
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    background: #0e35a8;
+    border-color: #0e35a8;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(16, 60, 190, 0.4);
+}
+
+.btn:not(.btn-link):hover {
+    transform: translateY(-1px);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Formulaires */
+.form-control:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.2rem rgba(16, 60, 190, 0.25);
+}
+
+.form-select:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.2rem rgba(16, 60, 190, 0.25);
+}
+
+/* Cartes */
+.card {
+    border: none;
+    border-radius: 15px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* Sidebar */
+.sidebar {
+    background: var(--primary-color);
+    min-height: 100vh;
+}
+
+.sidebar .nav-link {
+    color: rgba(255, 255, 255, 0.8);
+    transition: all 0.3s ease;
+    border-radius: 10px;
+    margin-bottom: 5px;
+}
+
+.sidebar .nav-link:hover,
+.sidebar .nav-link.active {
+    color: white;
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateX(5px);
+}
+
+/* Alertes */
+.alert {
+    border-radius: 15px;
+    border: none;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 100% !important;
+        min-height: auto;
+    }
+
+    .glass {
+        margin: 10px;
+        border-radius: 15px;
+    }
+}
+
+/* Animations pour les éléments interactifs */
+.card, .btn, .alert {
+    transition: all 0.3s ease;
+}
+
+/* Améliorations UX */
+.form-control {
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
+.form-control:focus {
+    transform: scale(1.02);
+}
+
+/* États de chargement */
+.loading {
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+.loading::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    margin: -10px 0 0 -10px;
+    border: 2px solid #ccc;
+    border-top-color: var(--primary-color);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}

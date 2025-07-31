@@ -1,0 +1,137 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}Connexion - Store Manager{% endblock %}
+
+{% block content %}
+<div class="auth-container min-vh-100 d-flex align-items-center justify-content-center">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-10 col-lg-8 col-xl-6">
+                <div class="auth-card glass-effect shadow-lg rounded-4 overflow-hidden">
+                    <div class="row g-0">
+                        <!-- Côté gauche avec illustration -->
+                        <div class="col-md-6 d-none d-md-flex flex-column justify-content-center align-items-center text-white p-5"
+                             style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                            <div class="text-center">
+                                <i class="fas fa-store-alt fa-5x mb-4"></i>
+                                <h2 class="fw-bold mb-3">Store Manager</h2>
+                                <p class="mb-3 opacity-75">La solution complète pour la gestion de votre magasin</p>
+                                <div class="d-flex justify-content-around w-100 mt-4">
+                                    <div class="text-center">
+                                        <i class="fas fa-chart-bar fa-2x mb-2"></i>
+                                        <small class="d-block">Analytics</small>
+                                    </div>
+                                    <div class="text-center">
+                                        <i class="fas fa-cash-register fa-2x mb-2"></i>
+                                        <small class="d-block">Caisse</small>
+                                    </div>
+                                    <div class="text-center">
+                                        <i class="fas fa-boxes fa-2x mb-2"></i>
+                                        <small class="d-block">Stock</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Côté droit avec formulaire -->
+                        <div class="col-md-6 p-5">
+                            <div class="auth-form">
+                                <div class="text-center mb-4">
+                                    <h3 class="fw-bold mb-2">Connexion</h3>
+                                    <p class="text-muted">Accédez à votre espace de gestion</p>
+                                </div>
+
+                                <!-- Messages -->
+                                {% if messages %}
+                                    {% for message in messages %}
+                                        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                                            {{ message }}
+                                            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                                        </div>
+                                    {% endfor %}
+                                {% endif %}
+
+                                <form method="post" novalidate>
+                                    {% csrf_token %}
+
+                                    <div class="mb-3">
+                                        {{ form.username|as_crispy_field }}
+                                    </div>
+
+                                    <div class="mb-3">
+                                        {{ form.password|as_crispy_field }}
+                                    </div>
+
+                                    <div class="d-flex justify-content-between align-items-center mb-4">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" name="remember_me" id="remember_me">
+                                            <label class="form-check-label" for="remember_me">
+                                                Se souvenir de moi
+                                            </label>
+                                        </div>
+                                        <!-- LIEN CORRIGÉ -->
+                                        <a href="{% url 'accounts:password_reset' %}" class="text-decoration-none">
+                                            <i class="fas fa-key me-1"></i>Mot de passe oublié ?
+                                        </a>
+                                    </div>
+
+                                    <div class="d-grid mb-4">
+                                        <button class="btn btn-primary btn-lg" type="submit">
+                                            <i class="fas fa-sign-in-alt me-2"></i>Se connecter
+                                        </button>
+                                    </div>
+
+                                    {% if form.non_field_errors %}
+                                        <div class="alert alert-danger">
+                                            {{ form.non_field_errors.0 }}
+                                        </div>
+                                    {% endif %}
+                                </form>
+
+                                <div class="text-center">
+                                    <p class="mb-0">Pas encore de compte ?</p>
+                                    <a href="{% url 'accounts:register' %}" class="text-decoration-none fw-semibold">
+                                        <i class="fas fa-user-plus me-1"></i>Créer un compte
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .auth-container {
+        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        min-height: 100vh;
+    }
+
+    .glass-effect {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .btn-primary {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border: none;
+        padding: 12px 0;
+        font-weight: 600;
+        transition: transform 0.2s ease;
+    }
+
+    .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+    }
+
+    .form-control:focus {
+        border-color: #667eea;
+        box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+    }
+</style>
+{% endblock %}

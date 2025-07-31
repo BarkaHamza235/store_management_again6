@@ -1,0 +1,300 @@
+{% extends 'base.html' %}
+
+{% block title %}Caisse - Store Manager{% endblock %}
+
+{% block content %}
+<div class="min-vh-100" style="background: linear-gradient(135deg, #28a745, #20c997);">
+    <div class="container-fluid p-4">
+        <!-- Header -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="glass p-3 fade-in">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h2 class="mb-0">
+                                <i class="fas fa-cash-register me-2"></i>
+                                Caisse Store Manager
+                            </h2>
+                            <p class="mb-0 text-muted">Interface point de vente</p>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <div class="me-4">
+                                <div class="d-flex align-items-center">
+                                    <i class="fas fa-user-circle fa-2x me-2"></i>
+                                    <div>
+                                        <strong>{{ user.get_full_name|default:user.username }}</strong><br>
+                                        <small class="text-muted">{{ user_role }}</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="btn-group">
+                                {% if user.is_admin %}
+                                    <a href="{% url 'core:dashboard' %}" class="btn btn-outline-primary">
+                                        <i class="fas fa-tachometer-alt me-1"></i>Dashboard
+                                    </a>
+                                {% endif %}
+                                <a href="{% url 'accounts:logout' %}" class="btn btn-outline-danger" onclick="return confirmLogout()">
+                                    <i class="fas fa-sign-out-alt me-1"></i>Déconnexion
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Messages -->
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                    <i class="fas fa-{% if message.tags == 'error' %}exclamation-triangle{% elif message.tags == 'success' %}check-circle{% else %}info-circle{% endif %} me-2"></i>
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+            {% endfor %}
+        {% endif %}
+
+        <div class="row">
+            <!-- Recherche et produits -->
+            <div class="col-md-8 mb-4">
+                <div class="glass p-4 fade-in h-100">
+                    <h4 class="mb-3">
+                        <i class="fas fa-search me-2"></i>
+                        Recherche de produits
+                    </h4>
+
+                    <div class="mb-4">
+                        <div class="input-group input-group-lg">
+                            <span class="input-group-text">
+                                <i class="fas fa-barcode"></i>
+                            </span>
+                            <input type="text" class="form-control" placeholder="Scanner ou saisir le code-barres..." 
+                                   id="product-search" autofocus>
+                            <button class="btn btn-primary" type="button">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Catégories rapides -->
+                    <div class="mb-4">
+                        <h6 class="mb-3">Catégories rapides (Phase 3 à venir)</h6>
+                        <div class="row">
+                            <div class="col-md-3 mb-2">
+                                <button class="btn btn-outline-secondary w-100" disabled>
+                                    <i class="fas fa-apple-alt me-2"></i>Alimentaire
+                                </button>
+                            </div>
+                            <div class="col-md-3 mb-2">
+                                <button class="btn btn-outline-secondary w-100" disabled>
+                                    <i class="fas fa-tshirt me-2"></i>Vêtements
+                                </button>
+                            </div>
+                            <div class="col-md-3 mb-2">
+                                <button class="btn btn-outline-secondary w-100" disabled>
+                                    <i class="fas fa-laptop me-2"></i>Électronique
+                                </button>
+                            </div>
+                            <div class="col-md-3 mb-2">
+                                <button class="btn btn-outline-secondary w-100" disabled>
+                                    <i class="fas fa-home me-2"></i>Maison
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Liste des produits -->
+                    <div style="height: 300px; overflow-y: auto; border: 2px dashed #dee2e6; border-radius: 10px; padding: 20px;">
+                        <div class="text-center text-muted">
+                            <i class="fas fa-boxes fa-5x mb-3"></i>
+                            <h5>Produits disponibles</h5>
+                            <p>La liste des produits apparaîtra ici lors de la Phase 3 du développement.</p>
+                            <p><small>En attendant, vous pouvez tester l'interface de caisse.</small></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Panier et paiement -->
+            <div class="col-md-4 mb-4">
+                <div class="glass p-4 fade-in h-100">
+                    <h4 class="mb-3">
+                        <i class="fas fa-shopping-cart me-2"></i>
+                        Panier <span id="cart-count" class="badge bg-primary">0</span>
+                    </h4>
+
+                    <!-- Articles du panier -->
+                    <div id="cart-items" style="height: 200px; overflow-y: auto; border: 1px solid #dee2e6; border-radius: 5px; padding: 10px; margin-bottom: 20px;">
+                        <div class="text-center text-muted">
+                            <i class="fas fa-cart-plus fa-3x mb-2"></i>
+                            <p>Le panier est vide</p>
+                            <small>Ajoutez des produits pour commencer</small>
+                        </div>
+                    </div>
+
+                    <!-- Total -->
+                    <div class="border-top pt-3 mb-3">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <span>Sous-total:</span>
+                            <strong id="subtotal">€0.00</strong>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <span>TVA (20%):</span>
+                            <strong id="tax">€0.00</strong>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h5 class="mb-0">Total:</h5>
+                            <h5 class="mb-0 text-success" id="total">€0.00</h5>
+                        </div>
+                    </div>
+
+                    <!-- Modes de paiement -->
+                    <div class="mb-3">
+                        <h6 class="mb-2">Mode de paiement</h6>
+                        <div class="btn-group w-100" role="group">
+                            <input type="radio" class="btn-check" name="payment" id="cash" value="cash" checked>
+                            <label class="btn btn-outline-success" for="cash">
+                                <i class="fas fa-money-bill-wave"></i><br>Espèces
+                            </label>
+
+                            <input type="radio" class="btn-check" name="payment" id="card" value="card">
+                            <label class="btn btn-outline-primary" for="card">
+                                <i class="fas fa-credit-card"></i><br>Carte
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Espèces reçues -->
+                    <div id="cash-section" class="mb-3">
+                        <label for="cash-received" class="form-label">Espèces reçues</label>
+                        <div class="input-group">
+                            <span class="input-group-text">€</span>
+                            <input type="number" class="form-control" id="cash-received" step="0.01" min="0">
+                        </div>
+                        <div id="change-display" class="mt-2" style="display: none;">
+                            <div class="alert alert-info">
+                                <strong>À rendre: <span id="change-amount">€0.00</span></strong>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Actions -->
+                    <div class="d-grid gap-2">
+                        <button class="btn btn-success btn-lg" id="complete-sale" disabled>
+                            <i class="fas fa-check me-2"></i>Finaliser la vente
+                        </button>
+                        <button class="btn btn-outline-danger" id="clear-cart">
+                            <i class="fas fa-trash me-2"></i>Vider le panier
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Raccourcis clavier -->
+        <div class="row">
+            <div class="col-12">
+                <div class="glass p-3 fade-in">
+                    <h6 class="mb-2">
+                        <i class="fas fa-keyboard me-2"></i>
+                        Raccourcis clavier
+                    </h6>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <small><kbd>F1</kbd> - Aide</small>
+                        </div>
+                        <div class="col-md-3">
+                            <small><kbd>F4</kbd> - Recherche</small>
+                        </div>
+                        <div class="col-md-3">
+                            <small><kbd>F12</kbd> - Finaliser</small>
+                        </div>
+                        <div class="col-md-3">
+                            <small><kbd>Esc</kbd> - Vider panier</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+// JavaScript pour l'interface de caisse
+document.addEventListener('DOMContentLoaded', function() {
+    const cashSection = document.getElementById('cash-section');
+    const cardSection = document.getElementById('card-section');
+    const cashReceived = document.getElementById('cash-received');
+    const changeDisplay = document.getElementById('change-display');
+    const changeAmount = document.getElementById('change-amount');
+    const completeSale = document.getElementById('complete-sale');
+
+    // Gestion des modes de paiement
+    document.querySelectorAll('input[name="payment"]').forEach(radio => {
+        radio.addEventListener('change', function() {
+            if (this.value === 'cash') {
+                cashSection.style.display = 'block';
+            } else {
+                cashSection.style.display = 'none';
+                changeDisplay.style.display = 'none';
+            }
+        });
+    });
+
+    // Calcul de la monnaie
+    cashReceived.addEventListener('input', function() {
+        const received = parseFloat(this.value) || 0;
+        const total = 0; // Will be dynamic when products are added
+        const change = received - total;
+
+        if (received > 0 && change >= 0) {
+            changeAmount.textContent = '€' + change.toFixed(2);
+            changeDisplay.style.display = 'block';
+            completeSale.disabled = false;
+        } else {
+            changeDisplay.style.display = 'none';
+            completeSale.disabled = true;
+        }
+    });
+
+    // Vider le panier
+    document.getElementById('clear-cart').addEventListener('click', function() {
+        if (confirm('Êtes-vous sûr de vouloir vider le panier ?')) {
+            // Logic to clear cart
+            document.getElementById('cart-count').textContent = '0';
+            document.getElementById('subtotal').textContent = '€0.00';
+            document.getElementById('tax').textContent = '€0.00';
+            document.getElementById('total').textContent = '€0.00';
+
+            const cartItems = document.getElementById('cart-items');
+            cartItems.innerHTML = `
+                <div class="text-center text-muted">
+                    <i class="fas fa-cart-plus fa-3x mb-2"></i>
+                    <p>Le panier est vide</p>
+                    <small>Ajoutez des produits pour commencer</small>
+                </div>
+            `;
+        }
+    });
+
+    // Raccourcis clavier
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'F4') {
+            e.preventDefault();
+            document.getElementById('product-search').focus();
+        } else if (e.key === 'F12') {
+            e.preventDefault();
+            if (!completeSale.disabled) {
+                completeSale.click();
+            }
+        } else if (e.key === 'Escape') {
+            e.preventDefault();
+            document.getElementById('clear-cart').click();
+        }
+    });
+
+    // Focus sur la recherche au chargement
+    document.getElementById('product-search').focus();
+});
+</script>
+{% endblock %}
