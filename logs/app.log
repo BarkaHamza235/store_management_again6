@@ -684,3 +684,7 @@ Traceback (most recent call last):
   File "C:\Users\HP\Downloads\store_manager_project_with_password_reset\venv\Lib\site-packages\django\urls\resolvers.py", line 831, in _reverse_with_prefix
     raise NoReverseMatch(msg)
 django.urls.exceptions.NoReverseMatch: Reverse for 'password_reset_confirm' not found. 'password_reset_confirm' is not a valid view function or pattern name.
+INFO 2025-08-01 20:03:32,145 autoreload 12676 10424 Watching for file changes with StatReloader
+WARNING 2025-08-01 20:03:36,709 log 12676 4392 Not Found: /favicon.ico
+INFO 2025-08-02 00:59:14,952 autoreload 11504 16048 Watching for file changes with StatReloader
+INFO 2025-08-02 02:06:41,887 autoreload 3108 18036 Watching for file changes with StatReloader
