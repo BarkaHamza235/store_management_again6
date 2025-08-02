@@ -688,3 +688,208 @@ INFO 2025-08-01 20:03:32,145 autoreload 12676 10424 Watching for file changes wi
 WARNING 2025-08-01 20:03:36,709 log 12676 4392 Not Found: /favicon.ico
 INFO 2025-08-02 00:59:14,952 autoreload 11504 16048 Watching for file changes with StatReloader
 INFO 2025-08-02 02:06:41,887 autoreload 3108 18036 Watching for file changes with StatReloader
+INFO 2025-08-02 02:52:57,208 autoreload 12172 16440 Watching for file changes with StatReloader
+INFO 2025-08-02 02:55:19,190 forms 12172 10604 Nouvel utilisateur créé: bhb (Administrateur)
+INFO 2025-08-02 06:07:26,382 autoreload 14600 18916 Watching for file changes with StatReloader
+INFO 2025-08-02 07:01:38,159 autoreload 18932 9100 Watching for file changes with StatReloader
+ERROR 2025-08-02 07:01:41,816 log 18932 13836 Internal Server Error: /
+Traceback (most recent call last):
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\store_manager\urls.py", line 7, in root_redirect
+    return redirect('accounts:login')
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\shortcuts.py", line 51, in redirect
+    resolve_url(to, *args, **kwargs),
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\shortcuts.py", line 184, in resolve_url
+    return reverse(to, args=args, kwargs=kwargs)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\urls\base.py", line 98, in reverse
+    resolved_url = resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\urls\resolvers.py", line 831, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'login' not found. 'login' is not a valid view function or pattern name.
+WARNING 2025-08-02 07:02:57,546 log 18932 13836 Not Found: /accounts/login/
+INFO 2025-08-02 07:03:57,012 autoreload 14024 15644 Watching for file changes with StatReloader
+WARNING 2025-08-02 07:04:19,068 log 14024 13832 Not Found: /accounts/login/
+INFO 2025-08-02 07:13:44,346 autoreload 9808 8960 Watching for file changes with StatReloader
+WARNING 2025-08-02 07:14:45,314 log 9808 14700 Not Found: /favicon.ico
+ERROR 2025-08-02 07:15:01,562 log 9808 14700 Internal Server Error: /accounts/login/
+Traceback (most recent call last):
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\db\backends\utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\db\backends\sqlite3\base.py", line 360, in execute
+    return super().execute(query, params)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+sqlite3.OperationalError: no such column: accounts_user.phone
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\utils\decorators.py", line 48, in _wrapper
+    return bound_method(*args, **kwargs)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\utils\decorators.py", line 48, in _wrapper
+    return bound_method(*args, **kwargs)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\views\decorators\debug.py", line 143, in sensitive_post_parameters_wrapper
+    return view(request, *args, **kwargs)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\utils\decorators.py", line 48, in _wrapper
+    return bound_method(*args, **kwargs)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\utils\decorators.py", line 192, in _view_wrapper
+    result = _process_exception(request, e)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\utils\decorators.py", line 190, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\utils\decorators.py", line 48, in _wrapper
+    return bound_method(*args, **kwargs)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\views\decorators\cache.py", line 80, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\contrib\auth\views.py", line 89, in dispatch
+    return super().dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\views\generic\base.py", line 143, in dispatch
+    return handler(request, *args, **kwargs)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\views\generic\edit.py", line 150, in post
+    if form.is_valid():
+       ~~~~~~~~~~~~~^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\forms\forms.py", line 206, in is_valid
+    return self.is_bound and not self.errors
+                                 ^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\forms\forms.py", line 201, in errors
+    self.full_clean()
+    ~~~~~~~~~~~~~~~^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\forms\forms.py", line 338, in full_clean
+    self._clean_form()
+    ~~~~~~~~~~~~~~~~^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\forms\forms.py", line 354, in _clean_form
+    cleaned_data = self.clean()
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\views\decorators\debug.py", line 75, in sensitive_variables_wrapper
+    return func(*func_args, **func_kwargs)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\contrib\auth\forms.py", line 366, in clean
+    self.user_cache = authenticate(
+                      ~~~~~~~~~~~~^
+        self.request, username=username, password=password
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\views\decorators\debug.py", line 75, in sensitive_variables_wrapper
+    return func(*func_args, **func_kwargs)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\contrib\auth\__init__.py", line 114, in authenticate
+    user = backend.authenticate(request, **credentials)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\contrib\auth\backends.py", line 65, in authenticate
+    user = UserModel._default_manager.get_by_natural_key(username)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\contrib\auth\base_user.py", line 37, in get_by_natural_key
+    return self.get(**{self.model.USERNAME_FIELD: username})
+           ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\db\models\query.py", line 629, in get
+    num = len(clone)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\db\models\query.py", line 366, in __len__
+    self._fetch_all()
+    ~~~~~~~~~~~~~~~^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\db\models\query.py", line 1935, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+                         ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\db\models\query.py", line 91, in __iter__
+    results = compiler.execute_sql(
+        chunked_fetch=self.chunked_fetch, chunk_size=self.chunk_size
+    )
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\db\models\sql\compiler.py", line 1622, in execute_sql
+    cursor.execute(sql, params)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\db\backends\utils.py", line 122, in execute
+    return super().execute(sql, params)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\db\backends\utils.py", line 79, in execute
+    return self._execute_with_wrappers(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        sql, params, many=False, executor=self._execute
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\db\backends\utils.py", line 92, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\db\backends\utils.py", line 100, in _execute
+    with self.db.wrap_database_errors:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\db\utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\db\backends\utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\db\backends\sqlite3\base.py", line 360, in execute
+    return super().execute(query, params)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+django.db.utils.OperationalError: no such column: accounts_user.phone
+INFO 2025-08-02 07:18:50,825 autoreload 4664 4844 Watching for file changes with StatReloader
+ERROR 2025-08-02 07:26:21,416 log 4664 3936 Internal Server Error: /accounts/employees/1/delete/
+Traceback (most recent call last):
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\core\handlers\base.py", line 220, in _get_response
+    response = response.render()
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\response.py", line 90, in rendered_content
+    template = self.resolve_template(self.template_name)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\response.py", line 72, in resolve_template
+    return select_template(template, using=self.using)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\loader.py", line 47, in select_template
+    raise TemplateDoesNotExist(", ".join(template_name_list), chain=chain)
+django.template.exceptions.TemplateDoesNotExist: accounts/employees/employee_confirm_delete.html
+ERROR 2025-08-02 07:26:27,634 log 4664 3936 Internal Server Error: /accounts/employees/6/delete/
+Traceback (most recent call last):
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\core\handlers\base.py", line 220, in _get_response
+    response = response.render()
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\response.py", line 90, in rendered_content
+    template = self.resolve_template(self.template_name)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\response.py", line 72, in resolve_template
+    return select_template(template, using=self.using)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\loader.py", line 47, in select_template
+    raise TemplateDoesNotExist(", ".join(template_name_list), chain=chain)
+django.template.exceptions.TemplateDoesNotExist: accounts/employees/employee_confirm_delete.html
+ERROR 2025-08-02 07:34:44,403 log 4664 3936 Internal Server Error: /accounts/employees/6/delete/
+Traceback (most recent call last):
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\core\handlers\base.py", line 220, in _get_response
+    response = response.render()
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\response.py", line 90, in rendered_content
+    template = self.resolve_template(self.template_name)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\response.py", line 72, in resolve_template
+    return select_template(template, using=self.using)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\loader.py", line 47, in select_template
+    raise TemplateDoesNotExist(", ".join(template_name_list), chain=chain)
+django.template.exceptions.TemplateDoesNotExist: accounts/employees/employee_confirm_delete.html
+INFO 2025-08-02 07:47:46,159 autoreload 5032 19016 Watching for file changes with StatReloader
+INFO 2025-08-02 08:16:17,327 autoreload 14976 12380 Watching for file changes with StatReloader
+INFO 2025-08-02 08:25:01,714 autoreload 18980 16536 Watching for file changes with StatReloader
+INFO 2025-08-02 08:31:07,127 autoreload 7652 10524 Watching for file changes with StatReloader
+INFO 2025-08-02 08:32:44,422 autoreload 1740 4044 Watching for file changes with StatReloader
+INFO 2025-08-02 08:35:07,757 autoreload 1740 4044 C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\apps\accounts\forms.py changed, reloading.
+INFO 2025-08-02 08:35:08,808 autoreload 8292 16000 Watching for file changes with StatReloader
+INFO 2025-08-02 08:35:31,014 autoreload 8292 16000 C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\apps\accounts\forms.py changed, reloading.
+INFO 2025-08-02 08:35:32,679 autoreload 4192 18412 Watching for file changes with StatReloader
+INFO 2025-08-02 08:35:52,070 autoreload 4192 18412 C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\apps\accounts\forms.py changed, reloading.
+INFO 2025-08-02 08:35:53,091 autoreload 12900 11972 Watching for file changes with StatReloader
+INFO 2025-08-02 08:36:00,634 autoreload 12900 11972 C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\apps\accounts\forms.py changed, reloading.
+INFO 2025-08-02 08:36:02,539 autoreload 15800 13208 Watching for file changes with StatReloader
+WARNING 2025-08-02 08:38:29,348 log 15800 17332 Not Found: /.well-known/appspecific/com.chrome.devtools.json

@@ -121,7 +121,7 @@ class RegisterForm(UserCreationForm):
     )
 
     password2 = forms.CharField(
-        label="Confirmation du mot de passe",
+        label="Confirmation",
         widget=forms.PasswordInput(attrs={
             'class': 'form-control',
             'placeholder': "Confirmez votre mot de passe"
