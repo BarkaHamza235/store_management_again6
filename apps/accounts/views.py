@@ -11,6 +11,16 @@ from .forms import LoginForm, RegisterForm
 from .models import User
 import logging
 
+from django.shortcuts import render, redirect, get_object_or_404
+from django.views.generic import View, ListView, CreateView, UpdateView, DetailView, DeleteView
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.urls import reverse_lazy
+from django.contrib import messages
+from django.http import JsonResponse
+from django.contrib.auth.views import LoginView, LogoutView
+from .models import User
+from .forms import EmployeeCreateForm, EmployeeUpdateForm, EmployeeSearchForm, LoginForm, RegisterForm
+
 logger = logging.getLogger(__name__)
 
 
@@ -82,3 +92,92 @@ PasswordResetView = CustomPasswordResetView
 PasswordResetDoneView = CustomPasswordResetDoneView
 PasswordResetConfirmView = CustomPasswordResetConfirmView
 PasswordResetCompleteView = CustomPasswordResetCompleteView
+
+
+# Mixin pour restreindre aux admins
+class AdminRequiredMixin(UserPassesTestMixin):
+    def test_func(self):
+        return self.request.user.is_authenticated and self.request.user.is_admin()
+    def handle_no_permission(self):
+        messages.error(self.request, "Accès refusé : administrateurs uniquement.")
+        return redirect('accounts:login')
+# ====================== CRUD EMPLOYÉS ======================
+class EmployeeListView(LoginRequiredMixin, AdminRequiredMixin, ListView):
+    model = User
+    template_name = 'accounts/employees/employee_list.html'
+    context_object_name = 'employees'
+    paginate_by = 15
+
+    def get_queryset(self):
+        qs = User.objects.exclude(pk=self.request.user.pk).order_by('-date_joined')
+        form = EmployeeSearchForm(self.request.GET)
+        if form.is_valid():
+            search = form.cleaned_data.get('search')
+            role = form.cleaned_data.get('role')
+            status = form.cleaned_data.get('status')
+            if search:
+                qs = qs.filter(first_name__icontains=search) \
+                     | qs.filter(last_name__icontains=search) \
+                     | qs.filter(email__icontains=search)
+            if role: qs = qs.filter(role=role)
+            if status=='active': qs = qs.filter(is_active=True)
+            elif status=='inactive': qs = qs.filter(is_active=False)
+        return qs
+
+    def get_context_data(self, **kwargs):
+        ctx = super().get_context_data(**kwargs)
+        ctx['search_form'] = EmployeeSearchForm(self.request.GET)
+        ctx['total'] = self.get_queryset().count()
+        ctx['active'] = self.get_queryset().filter(is_active=True).count()
+        ctx['inactive'] = self.get_queryset().filter(is_active=False).count()
+        return ctx
+
+class EmployeeCreateView(LoginRequiredMixin, AdminRequiredMixin, CreateView):
+    model = User
+    form_class = EmployeeCreateForm
+    template_name = 'accounts/employees/employee_form.html'
+    success_url = reverse_lazy('accounts:employee_list')
+    def form_valid(self, form):
+        resp = super().form_valid(form)
+        messages.success(self.request, f"Employé {self.object.get_full_name()} créé !")
+        return resp
+
+class EmployeeUpdateView(LoginRequiredMixin, AdminRequiredMixin, UpdateView):
+    model = User
+    form_class = EmployeeUpdateForm
+    template_name = 'accounts/employees/employee_form.html'
+    success_url = reverse_lazy('accounts:employee_list')
+    def get_queryset(self):
+        return User.objects.exclude(pk=self.request.user.pk)  ##### empêche auto-modification
+    def form_valid(self, form):
+        resp = super().form_valid(form)
+        messages.success(self.request, f"Employé {self.object.get_full_name()} mis à jour !")
+        return resp
+
+class EmployeeDetailView(LoginRequiredMixin, AdminRequiredMixin, DetailView):
+    model = User
+    template_name = 'accounts/employees/employee_detail.html'
+    context_object_name = 'employee'
+    def get_queryset(self):
+        return User.objects.exclude(pk=self.request.user.pk)
+
+class EmployeeDeleteView(LoginRequiredMixin, AdminRequiredMixin, DeleteView):
+    model = User
+    template_name = 'accounts/employees/employee_confirm_delete.html'
+    success_url = reverse_lazy('accounts:employee_list')
+    def get_queryset(self):
+        return User.objects.exclude(pk=self.request.user.pk)
+    def delete(self, request, *args, **kwargs):
+        obj = self.get_object()
+        messages.success(request, f"Employé {obj.get_full_name()} supprimé.")
+        return super().delete(request, *args, **kwargs)
+
+class EmployeeToggleStatusView(LoginRequiredMixin, AdminRequiredMixin, View):
+    def post(self, request, pk):
+        emp = get_object_or_404(User, pk=pk)
+        if emp.pk == request.user.pk:
+            return JsonResponse({'success': False, 'msg': "Vous ne pouvez pas désactiver vous-même."})
+        emp.is_active = not emp.is_active
+        emp.save()
+        state = 'activé' if emp.is_active else 'désactivé'
+        return JsonResponse({'success': True, 'state': state})

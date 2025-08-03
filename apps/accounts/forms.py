@@ -4,6 +4,9 @@ from django.core.exceptions import ValidationError
 from django.contrib.auth import authenticate
 from .models import User
 import logging
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth import get_user_model
+from datetime import date
 
 logger = logging.getLogger(__name__)
 
@@ -157,3 +160,83 @@ class RegisterForm(UserCreationForm):
             logger.info(f"Nouvel utilisateur créé: {user.username} ({user.get_role_display()})")
 
         return user
+
+
+
+###employés
+class EmployeeCreateForm(UserCreationForm):
+    """Formulaire de création d'employé"""
+    first_name = forms.CharField(max_length=150, required=True,
+        widget=forms.TextInput(attrs={'class': 'form-control'}), label="Prénom")
+    last_name = forms.CharField(max_length=150, required=True,
+        widget=forms.TextInput(attrs={'class': 'form-control'}), label="Nom de famille")
+    email = forms.EmailField(required=True,
+        widget=forms.EmailInput(attrs={'class': 'form-control'}), label="Email")
+    phone = forms.CharField(max_length=20, required=False,
+        widget=forms.TextInput(attrs={'class': 'form-control'}), label="Téléphone")
+    address = forms.CharField(required=False,
+        widget=forms.Textarea(attrs={'class': 'form-control','rows':3}), label="Adresse")
+    role = forms.ChoiceField(choices=User.Role.choices,
+        widget=forms.Select(attrs={'class':'form-control'}), label="Rôle")
+    hire_date = forms.DateField(required=False, initial=date.today,
+        widget=forms.DateInput(attrs={'class':'form-control','type':'date'}), label="Date d'embauche")
+
+    class Meta:
+        model = User
+        fields = ('username','first_name','last_name','email',
+                  'phone','address','role','hire_date','password1','password2')
+
+    def __init__(self,*args,**kwargs):
+        super().__init__(*args,**kwargs)
+        self.fields['username'].widget.attrs.update({'class':'form-control'})
+        self.fields['password1'].widget.attrs.update({'class':'form-control'})
+        self.fields['password2'].widget.attrs.update({'class':'form-control'})
+
+    def clean_email(self):
+        email=self.cleaned_data.get('email')
+        if User.objects.filter(email=email).exists():
+            raise forms.ValidationError("Email déjà utilisé.")
+        return email
+
+class EmployeeUpdateForm(forms.ModelForm):
+    """Formulaire de modification d'employé"""
+    first_name = forms.CharField(max_length=150, required=True,
+        widget=forms.TextInput(attrs={'class':'form-control'}), label="Prénom")
+    last_name = forms.CharField(max_length=150, required=True,
+        widget=forms.TextInput(attrs={'class':'form-control'}), label="Nom de famille")
+    email = forms.EmailField(required=True,
+        widget=forms.EmailInput(attrs={'class':'form-control'}), label="Email")
+    phone = forms.CharField(max_length=20, required=False,
+        widget=forms.TextInput(attrs={'class':'form-control'}), label="Téléphone")
+    address = forms.CharField(required=False,
+        widget=forms.Textarea(attrs={'class':'form-control','rows':3}), label="Adresse")
+    role = forms.ChoiceField(choices=User.Role.choices,
+        widget=forms.Select(attrs={'class':'form-control'}), label="Rôle")
+    hire_date = forms.DateField(required=False,
+        widget=forms.DateInput(attrs={'class':'form-control','type':'date'}), label="Date d'embauche")
+    is_active = forms.BooleanField(required=False,
+        widget=forms.CheckboxInput(attrs={'class':'form-check-input'}), label="Compte actif")
+
+    class Meta:
+        model = User
+        fields = ('username','first_name','last_name','email',
+                  'phone','address','role','hire_date','is_active')
+
+    def __init__(self,*args,**kwargs):
+        super().__init__(*args,**kwargs)
+        self.fields['username'].widget.attrs.update({'class':'form-control'})
+
+    def clean_email(self):
+        email=self.cleaned_data.get('email')
+        if User.objects.filter(email=email).exclude(pk=self.instance.pk).exists():
+            raise forms.ValidationError("Email déjà utilisé.")
+        return email
+
+class EmployeeSearchForm(forms.Form):
+    """Formulaire de recherche d'employés"""
+    search = forms.CharField(max_length=100, required=False,
+        widget=forms.TextInput(attrs={'class':'form-control','placeholder':'Rechercher par nom, email...'}), label="")
+    role = forms.ChoiceField(choices=[('','Tous les rôles')]+list(User.Role.choices),
+        required=False, widget=forms.Select(attrs={'class':'form-control'}), label="")
+    status = forms.ChoiceField(choices=[('','Tous les statuts'),('active','Actifs'),('inactive','Inactifs')],
+        required=False, widget=forms.Select(attrs={'class':'form-control'}), label="")
