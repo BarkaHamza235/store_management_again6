@@ -1,0 +1,112 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+  {% if object %}Modifier Fournisseur{% else %}Ajouter Fournisseur{% endif %}
+{% endblock %}
+
+{% block extra_css %}
+<style>
+  .form-container {
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 12px;
+    padding: 2rem;
+    margin: 2rem auto;
+    max-width: 800px;
+    color: #fff;
+  }
+  .form-row {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+  .form-col {
+    flex: 1;
+  }
+  .btn-submit {
+    background: #4e73df;
+    border: none;
+    color: #fff;
+    padding: 0.6rem 1.2rem;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    transition: background 0.2s;
+  }
+  .btn-submit:hover {
+    background: #2e59d9;
+  }
+  .btn-cancel {
+    background: transparent;
+    border: 1px solid #fff;
+    color: #fff;
+    padding: 0.6rem 1.2rem;
+    border-radius: 8px;
+    margin-left: 1rem;
+    font-size: 0.95rem;
+    text-decoration: none;
+  }
+  .btn-cancel:hover {
+    background: rgba(255,255,255,0.1);
+    color: #fff;
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container form-container">
+  <h1 class="mb-4">
+    {% if object %}Modifier Fournisseur{% else %}Ajouter Fournisseur{% endif %}
+  </h1>
+
+  <form method="post">
+    {% csrf_token %}
+    
+    <!-- Ligne 1 : Nom et Contact -->
+    <div class="form-row">
+      <div class="form-col">
+        {{ form.name|as_crispy_field }}
+      </div>
+      <div class="form-col">
+        {{ form.contact_person|as_crispy_field }}
+      </div>
+    </div>
+
+    <!-- Ligne 2 : Email et Téléphone -->
+    <div class="form-row">
+      <div class="form-col">
+        {{ form.email|as_crispy_field }}
+      </div>
+      <div class="form-col">
+        {{ form.phone|as_crispy_field }}
+      </div>
+    </div>
+
+    <!-- Ligne 3 : Adresse et Statut -->
+    <div class="form-row">
+      <div class="form-col">
+        {{ form.address|as_crispy_field }}
+      </div>
+      <div class="form-col">
+        {{ form.status|as_crispy_field }}
+      </div>
+    </div>
+
+    <!-- Ligne 4 : Description (full width) -->
+    <div class="form-row">
+      <div class="form-col">
+        {{ form.notes|as_crispy_field }}
+      </div>
+    </div>
+
+    <!-- Boutons -->
+    <div class="text-end mt-4">
+      <button type="submit" class="btn-submit">
+        {% if object %}Sauvegarder{% else %}Créer{% endif %}
+      </button>
+      <a href="{% url 'accounts:supplier_list' %}" class="btn-cancel">Annuler</a>
+    </div>
+  </form>
+</div>
+{% endblock %}

@@ -10,10 +10,8 @@ from datetime import date
 
 logger = logging.getLogger(__name__)
 
-
 class LoginForm(AuthenticationForm):
     """Formulaire de connexion personnalisé avec logging"""
-
     username = forms.CharField(
         label="Nom d'utilisateur ou Email",
         widget=forms.TextInput(attrs={
@@ -48,7 +46,6 @@ class LoginForm(AuthenticationForm):
         cleaned_data = super().clean()
         username = cleaned_data.get('username')
         password = cleaned_data.get('password')
-
         if username and password:
             # Tentative d'authentification avec email si ce n'est pas un username
             if '@' in username:
@@ -58,17 +55,13 @@ class LoginForm(AuthenticationForm):
                     cleaned_data['username'] = username
                 except User.DoesNotExist:
                     logger.warning(f"Tentative de connexion avec email inexistant: {username}")
-
             # Log des tentatives de connexion échouées
             if not authenticate(username=username, password=password):
                 logger.warning(f"Échec de connexion pour: {username}")
-
         return cleaned_data
-
 
 class RegisterForm(UserCreationForm):
     """Formulaire d'inscription avec validation complète"""
-
     first_name = forms.CharField(
         label="Prénom",
         max_length=30,
@@ -154,16 +147,13 @@ class RegisterForm(UserCreationForm):
         user = super().save(commit=False)
         user.email = self.cleaned_data['email']
         user.role = self.cleaned_data['role']
-
         if commit:
             user.save()
             logger.info(f"Nouvel utilisateur créé: {user.username} ({user.get_role_display()})")
-
         return user
 
-
-
 ###employés
+
 class EmployeeCreateForm(UserCreationForm):
     """Formulaire de création d'employé"""
     first_name = forms.CharField(max_length=150, required=True,
@@ -240,3 +230,121 @@ class EmployeeSearchForm(forms.Form):
         required=False, widget=forms.Select(attrs={'class':'form-control'}), label="")
     status = forms.ChoiceField(choices=[('','Tous les statuts'),('active','Actifs'),('inactive','Inactifs')],
         required=False, widget=forms.Select(attrs={'class':'form-control'}), label="")
+
+# ===== FOURNISSEURS =====
+
+from django import forms
+from apps.core.models import Supplier
+
+class SupplierCreateForm(forms.ModelForm):
+    """Formulaire de création et modification de fournisseur"""
+    class Meta:
+        model = Supplier
+        fields = [
+            'name',
+            'contact_person',
+            'email',
+            'phone',
+            'address',
+            'notes',
+            'status',
+        ]
+        widgets = {
+            'name': forms.TextInput(attrs={'class': 'form-control'}),
+            'contact_person': forms.TextInput(attrs={'class': 'form-control'}),
+            'email': forms.EmailInput(attrs={'class': 'form-control'}),
+            'phone': forms.TextInput(attrs={'class': 'form-control'}),
+            'address': forms.Textarea(attrs={'class': 'form-control', 'rows': 2}),
+            'notes': forms.Textarea(attrs={'class': 'form-control', 'rows': 3}),
+            'status': forms.Select(attrs={'class': 'form-select'}),
+        }
+        labels = {
+            'name': 'Nom du fournisseur',
+            'contact_person': 'Personne de contact',
+            'email': 'Email',
+            'phone': 'Téléphone',
+            'address': 'Adresse',
+            'notes': 'Notes',
+            'status': 'Statut',
+        }
+
+class SupplierSearchForm(forms.Form):
+    """Formulaire de recherche des fournisseurs"""
+    search = forms.CharField(
+        required=False,
+        widget=forms.TextInput(attrs={
+            'class': 'form-control',
+            'placeholder': 'Rechercher par nom, email…'
+        })
+    )
+    status = forms.ChoiceField(
+        required=False,
+        choices=[('', 'Tous les statuts')] + list(Supplier.Status.choices),
+        widget=forms.Select(attrs={'class': 'form-select'})
+    )
+
+
+
+
+from apps.core.models import Category
+
+class CategoryCreateForm(forms.ModelForm):
+    class Meta:
+        model = Category
+        fields = ['name', 'description']
+        widgets = {
+            'name': forms.TextInput(attrs={'class':'form-control'}),
+            'description': forms.Textarea(attrs={'class':'form-control','rows':3}),
+        }
+        labels = {
+            'name': 'Nom',
+            'description': 'Description',
+        }
+
+class CategorySearchForm(forms.Form):
+    search = forms.CharField(
+        required=False,
+        widget=forms.TextInput(attrs={'class':'form-control','placeholder':'Rechercher par nom…'})
+    )
+
+
+
+from apps.core.models import Product
+
+class ProductCreateForm(forms.ModelForm):
+    class Meta:
+        model = Product
+        fields = ['name', 'category', 'price', 'stock_quantity', 'description', 'status']
+        widgets = {
+            'name': forms.TextInput(attrs={'class':'form-control'}),
+            'category': forms.Select(attrs={'class':'form-select'}),
+            'price': forms.NumberInput(attrs={'class':'form-control', 'step':'0.01'}),
+            'stock_quantity': forms.NumberInput(attrs={'class':'form-control'}),
+            'description': forms.Textarea(attrs={'class':'form-control','rows':3}),
+            'status': forms.Select(attrs={'class':'form-select'}),
+        }
+        labels = {
+            'name': 'Nom du produit',
+            'category': 'Catégorie',
+            'price': 'Prix (€)',
+            'stock_quantity': 'Stock',
+            'description': 'Description',
+            'status': 'Statut',
+        }
+
+class ProductSearchForm(forms.Form):
+    search = forms.CharField(
+        required=False,
+        widget=forms.TextInput(attrs={'class':'form-control','placeholder':'Rechercher produit…'})
+    )
+    category = forms.ModelChoiceField(
+        queryset=Category.objects.all(),
+        required=False,
+        empty_label="Toutes les catégories",
+        widget=forms.Select(attrs={'class':'form-select'})
+    )
+    status = forms.ChoiceField(
+        required=False,
+        choices=[('', 'Tous les statuts')] + list(Product.Status.choices),
+        widget=forms.Select(attrs={'class':'form-select'})
+    )

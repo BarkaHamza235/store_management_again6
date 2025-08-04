@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}Supprimer Catégorie{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+  <h1>Supprimer {{ category.name }}</h1>
+  <p>Voulez-vous vraiment supprimer définitivement cette catégorie ?</p>
+  <form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">
+      <i class="fas fa-trash-alt"></i> Oui, supprimer
+    </button>
+    <a href="{% url 'accounts:category_list' %}" class="btn btn-secondary ms-2">
+      Annuler
+    </a>
+  </form>
+</div>
+{% endblock %}

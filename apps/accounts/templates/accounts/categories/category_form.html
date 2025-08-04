@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+  {% if object %}Modifier Catégorie{% else %}Ajouter Catégorie{% endif %}
+{% endblock %}
+
+{% block extra_css %}
+<style>
+  .form-container {
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(12px);
+    border-radius: 12px;
+    padding: 2rem;
+    margin: 2rem auto;
+    max-width: 600px;
+    color: #fff;
+  }
+  .form-row {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+  .form-col {
+    flex: 1;
+  }
+  .btn-submit {
+    background: #4e73df;
+    border: none;
+    color: #fff;
+    padding: 0.6rem 1.2rem;
+    border-radius: 8px;
+    transition: background 0.2s;
+  }
+  .btn-submit:hover {
+    background: #2e59d9;
+  }
+  .btn-cancel {
+    background: transparent;
+    border: 1px solid #fff;
+    color: #fff;
+    padding: 0.6rem 1.2rem;
+    border-radius: 8px;
+    margin-left: 1rem;
+    text-decoration: none;
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container form-container">
+  <h1 class="mb-4">
+    {% if object %}Modifier Catégorie{% else %}Ajouter Catégorie{% endif %}
+  </h1>
+  <form method="post">
+    {% csrf_token %}
+    <!-- Nom et Description -->
+    <div class="form-row">
+      <div class="form-col">
+        {{ form.name|as_crispy_field }}
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-col">
+        {{ form.description|as_crispy_field }}
+      </div>
+    </div>
+    <!-- Boutons -->
+    <div class="text-end mt-4">
+      <button type="submit" class="btn-submit">
+        {% if object %}Sauvegarder{% else %}Créer{% endif %}
+      </button>
+      <a href="{% url 'accounts:category_list' %}" class="btn-cancel">Annuler</a>
+    </div>
+  </form>
+</div>
+{% endblock %}

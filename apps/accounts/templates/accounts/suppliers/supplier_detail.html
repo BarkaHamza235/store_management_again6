@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block title %}Détails Fournisseur{% endblock %}
+{% block content %}
+<h1>{{ supplier.name }}</h1>
+<ul>
+  <li>Contact : {{ supplier.contact_person }}</li>
+  <li>Email : {{ supplier.email }}</li>
+  <li>Téléphone : {{ supplier.phone }}</li>
+  <li>Adresse : {{ supplier.address }}, {{ supplier.city }}</li>
+  <li>Statut : {{ supplier.get_status_display }}</li>
+</ul>
+<a href="{% url 'accounts:supplier_edit' supplier.pk %}" class="btn btn-warning">Modifier</a>
+<a href="{% url 'accounts:supplier_delete' supplier.pk %}" class="btn btn-danger">Supprimer</a>
+<a href="{% url 'accounts:supplier_list' %}" class="btn btn-secondary">Retour</a>
+{% endblock %}

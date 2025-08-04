@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}Détails Catégorie{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+  <h1>{{ category.name }}</h1>
+  <p><strong>Description :</strong><br>{{ category.description|linebreaks }}</p>
+  <p><strong>Créé le :</strong> {{ category.created_at|date:"d/m/Y H:i" }}</p>
+  <div class="mt-4">
+    <a href="{% url 'accounts:category_edit' category.pk %}" class="btn btn-warning me-2">
+      <i class="fas fa-edit"></i> Modifier
+    </a>
+    <a href="{% url 'accounts:category_delete' category.pk %}" class="btn btn-danger">
+      <i class="fas fa-trash"></i> Supprimer
+    </a>
+    <a href="{% url 'accounts:category_list' %}" class="btn btn-secondary ms-2">
+      Retour
+    </a>
+  </div>
+</div>
+{% endblock %}

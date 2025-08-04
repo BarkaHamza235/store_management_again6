@@ -84,3 +84,11 @@ class User(AbstractUser):
     def role_badge_class(self):
         """Classe CSS pour badge rôle"""
         return "badge bg-danger" if self.is_admin() else "badge bg-primary"
+    
+    
+    #description fournisseur
+    description = models.TextField(
+    blank=True,
+    verbose_name="Description",
+    help_text="Description détaillée du fournisseur"
+)

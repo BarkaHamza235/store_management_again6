@@ -1045,3 +1045,1243 @@ Traceback (most recent call last):
 django.urls.exceptions.NoReverseMatch: Reverse for 'employee_detail' with arguments '('',)' not found. 1 pattern(s) tried: ['accounts/employees/(?P<pk>[0-9]+)/\\Z']
 INFO 2025-08-03 13:01:30,933 autoreload 13304 14116 Watching for file changes with StatReloader
 WARNING 2025-08-03 13:04:19,719 log 13304 6772 Not Found: /accounts/employees/6/delete/
+INFO 2025-08-03 13:20:00,350 autoreload 16980 20188 Watching for file changes with StatReloader
+WARNING 2025-08-03 15:33:46,127 log 16980 16344 Not Found: /accounts/
+INFO 2025-08-03 15:58:42,844 autoreload 19596 19388 Watching for file changes with StatReloader
+ERROR 2025-08-03 16:00:57,094 log 19596 19952 Internal Server Error: /core/suppliers/
+Traceback (most recent call last):
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\db\backends\utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\db\backends\sqlite3\base.py", line 360, in execute
+    return super().execute(query, params)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+sqlite3.OperationalError: no such table: core_supplier
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\contrib\auth\mixins.py", line 73, in dispatch
+    return super().dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\views\generic\base.py", line 143, in dispatch
+    return handler(request, *args, **kwargs)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\views\generic\list.py", line 178, in get
+    context = self.get_context_data()
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\apps\core\views.py", line 88, in get_context_data
+    context = super().get_context_data(**kwargs)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\views\generic\list.py", line 128, in get_context_data
+    paginator, page, queryset, is_paginated = self.paginate_queryset(
+                                              ~~~~~~~~~~~~~~~~~~~~~~^
+        queryset, page_size
+        ^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\views\generic\list.py", line 73, in paginate_queryset
+    page = paginator.page(page_number)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\core\paginator.py", line 89, in page
+    number = self.validate_number(number)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\core\paginator.py", line 70, in validate_number
+    if number > self.num_pages:
+                ^^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\utils\functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\core\paginator.py", line 116, in num_pages
+    if self.count == 0 and not self.allow_empty_first_page:
+       ^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\utils\functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\core\paginator.py", line 110, in count
+    return c()
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\db\models\query.py", line 604, in count
+    return self.query.get_count(using=self.db)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\db\models\sql\query.py", line 644, in get_count
+    return obj.get_aggregation(using, {"__count": Count("*")})["__count"]
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\db\models\sql\query.py", line 626, in get_aggregation
+    result = compiler.execute_sql(SINGLE)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\db\models\sql\compiler.py", line 1622, in execute_sql
+    cursor.execute(sql, params)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\db\backends\utils.py", line 122, in execute
+    return super().execute(sql, params)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\db\backends\utils.py", line 79, in execute
+    return self._execute_with_wrappers(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        sql, params, many=False, executor=self._execute
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\db\backends\utils.py", line 92, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\db\backends\utils.py", line 100, in _execute
+    with self.db.wrap_database_errors:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\db\utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\db\backends\utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\db\backends\sqlite3\base.py", line 360, in execute
+    return super().execute(query, params)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+django.db.utils.OperationalError: no such table: core_supplier
+INFO 2025-08-03 16:08:25,351 autoreload 19684 6104 Watching for file changes with StatReloader
+INFO 2025-08-03 16:08:46,899 autoreload 16276 5464 Watching for file changes with StatReloader
+ERROR 2025-08-03 16:08:59,514 log 16276 15380 Internal Server Error: /core/suppliers/
+Traceback (most recent call last):
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\core\handlers\base.py", line 220, in _get_response
+    response = response.render()
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\response.py", line 90, in rendered_content
+    template = self.resolve_template(self.template_name)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\response.py", line 72, in resolve_template
+    return select_template(template, using=self.using)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\loader.py", line 47, in select_template
+    raise TemplateDoesNotExist(", ".join(template_name_list), chain=chain)
+django.template.exceptions.TemplateDoesNotExist: core/suppliers/supplier_list.html, core/supplier_list.html
+INFO 2025-08-03 16:11:55,824 autoreload 7716 20416 Watching for file changes with StatReloader
+ERROR 2025-08-03 16:12:03,435 log 7716 7604 Internal Server Error: /core/suppliers/
+Traceback (most recent call last):
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\core\handlers\base.py", line 220, in _get_response
+    response = response.render()
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\response.py", line 90, in rendered_content
+    template = self.resolve_template(self.template_name)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\response.py", line 72, in resolve_template
+    return select_template(template, using=self.using)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\loader.py", line 47, in select_template
+    raise TemplateDoesNotExist(", ".join(template_name_list), chain=chain)
+django.template.exceptions.TemplateDoesNotExist: core/suppliers/supplier_list.html, core/supplier_list.html
+INFO 2025-08-03 16:26:41,540 autoreload 8840 812 Watching for file changes with StatReloader
+ERROR 2025-08-03 16:27:19,960 log 8840 18944 Internal Server Error: /core/suppliers/add/
+Traceback (most recent call last):
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\core\handlers\base.py", line 220, in _get_response
+    response = response.render()
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\response.py", line 90, in rendered_content
+    template = self.resolve_template(self.template_name)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\response.py", line 72, in resolve_template
+    return select_template(template, using=self.using)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\loader.py", line 47, in select_template
+    raise TemplateDoesNotExist(", ".join(template_name_list), chain=chain)
+django.template.exceptions.TemplateDoesNotExist: core/suppliers/supplier_form.html
+INFO 2025-08-03 17:06:03,359 autoreload 14944 13164 Watching for file changes with StatReloader
+INFO 2025-08-03 17:12:40,222 autoreload 18744 19952 Watching for file changes with StatReloader
+INFO 2025-08-03 17:20:03,073 autoreload 8932 9692 Watching for file changes with StatReloader
+INFO 2025-08-03 17:36:44,397 autoreload 17764 13752 Watching for file changes with StatReloader
+INFO 2025-08-03 17:41:25,727 autoreload 5820 4460 Watching for file changes with StatReloader
+INFO 2025-08-03 17:48:50,551 autoreload 12044 15420 Watching for file changes with StatReloader
+INFO 2025-08-03 18:05:49,290 autoreload 6052 13200 Watching for file changes with StatReloader
+INFO 2025-08-03 20:48:31,091 autoreload 17164 18652 Watching for file changes with StatReloader
+INFO 2025-08-03 20:59:21,479 autoreload 19144 18204 Watching for file changes with StatReloader
+INFO 2025-08-03 21:08:37,731 autoreload 6612 21108 Watching for file changes with StatReloader
+INFO 2025-08-03 21:36:21,002 autoreload 21244 9072 Watching for file changes with StatReloader
+INFO 2025-08-03 23:09:46,521 autoreload 17080 18388 Watching for file changes with StatReloader
+ERROR 2025-08-03 23:09:51,919 log 17080 18624 Internal Server Error: /accounts/login/
+Traceback (most recent call last):
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\db\backends\utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\db\backends\sqlite3\base.py", line 360, in execute
+    return super().execute(query, params)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+sqlite3.OperationalError: no such column: accounts_user.description
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\utils\decorators.py", line 48, in _wrapper
+    return bound_method(*args, **kwargs)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\utils\decorators.py", line 48, in _wrapper
+    return bound_method(*args, **kwargs)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\views\decorators\debug.py", line 143, in sensitive_post_parameters_wrapper
+    return view(request, *args, **kwargs)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\utils\decorators.py", line 48, in _wrapper
+    return bound_method(*args, **kwargs)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\utils\decorators.py", line 192, in _view_wrapper
+    result = _process_exception(request, e)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\utils\decorators.py", line 190, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\utils\decorators.py", line 48, in _wrapper
+    return bound_method(*args, **kwargs)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\views\decorators\cache.py", line 80, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\contrib\auth\views.py", line 81, in dispatch
+    if self.redirect_authenticated_user and self.request.user.is_authenticated:
+                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\utils\functional.py", line 251, in inner
+    self._setup()
+    ~~~~~~~~~~~^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\utils\functional.py", line 404, in _setup
+    self._wrapped = self._setupfunc()
+                    ~~~~~~~~~~~~~~~^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\contrib\auth\middleware.py", line 39, in <lambda>
+    request.user = SimpleLazyObject(lambda: get_user(request))
+                                            ~~~~~~~~^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\contrib\auth\middleware.py", line 19, in get_user
+    request._cached_user = auth.get_user(request)
+                           ~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\contrib\auth\__init__.py", line 311, in get_user
+    user = backend.get_user(user_id)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\contrib\auth\backends.py", line 232, in get_user
+    user = UserModel._default_manager.get(pk=user_id)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\db\models\query.py", line 629, in get
+    num = len(clone)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\db\models\query.py", line 366, in __len__
+    self._fetch_all()
+    ~~~~~~~~~~~~~~~^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\db\models\query.py", line 1935, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+                         ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\db\models\query.py", line 91, in __iter__
+    results = compiler.execute_sql(
+        chunked_fetch=self.chunked_fetch, chunk_size=self.chunk_size
+    )
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\db\models\sql\compiler.py", line 1622, in execute_sql
+    cursor.execute(sql, params)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\db\backends\utils.py", line 122, in execute
+    return super().execute(sql, params)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\db\backends\utils.py", line 79, in execute
+    return self._execute_with_wrappers(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        sql, params, many=False, executor=self._execute
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\db\backends\utils.py", line 92, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\db\backends\utils.py", line 100, in _execute
+    with self.db.wrap_database_errors:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\db\utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\db\backends\utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\db\backends\sqlite3\base.py", line 360, in execute
+    return super().execute(query, params)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+django.db.utils.OperationalError: no such column: accounts_user.description
+INFO 2025-08-03 23:18:56,421 autoreload 11364 11196 Watching for file changes with StatReloader
+INFO 2025-08-04 00:03:44,454 autoreload 6024 9596 Watching for file changes with StatReloader
+INFO 2025-08-04 02:49:23,814 autoreload 18652 16112 Watching for file changes with StatReloader
+INFO 2025-08-04 03:06:48,493 autoreload 19988 20588 Watching for file changes with StatReloader
+INFO 2025-08-04 03:16:22,434 autoreload 13844 11380 Watching for file changes with StatReloader
+INFO 2025-08-04 03:22:29,894 autoreload 19380 17208 Watching for file changes with StatReloader
+INFO 2025-08-04 03:55:16,967 autoreload 13388 1756 Watching for file changes with StatReloader
+INFO 2025-08-04 04:11:32,513 autoreload 18340 15328 Watching for file changes with StatReloader
+ERROR 2025-08-04 04:11:56,551 log 18340 20280 Internal Server Error: /accounts/products/
+Traceback (most recent call last):
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\contrib\auth\mixins.py", line 73, in dispatch
+    return super().dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\contrib\auth\mixins.py", line 135, in dispatch
+    return super().dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\views\generic\base.py", line 143, in dispatch
+    return handler(request, *args, **kwargs)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\views\generic\list.py", line 178, in get
+    context = self.get_context_data()
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\apps\accounts\views.py", line 352, in get_context_data
+    ctx['status_filter'] = form.cleaned_data.get('status', '')
+                           ^^^^^^^^^^^^^^^^^
+AttributeError: 'ProductSearchForm' object has no attribute 'cleaned_data'. Did you mean: 'changed_data'?
+INFO 2025-08-04 04:26:45,761 autoreload 20580 16956 Watching for file changes with StatReloader
+ERROR 2025-08-04 04:26:54,990 log 20580 20388 Internal Server Error: /accounts/products/
+Traceback (most recent call last):
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\contrib\auth\mixins.py", line 73, in dispatch
+    return super().dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\contrib\auth\mixins.py", line 135, in dispatch
+    return super().dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\views\generic\base.py", line 143, in dispatch
+    return handler(request, *args, **kwargs)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\views\generic\list.py", line 178, in get
+    context = self.get_context_data()
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\apps\accounts\views.py", line 371, in get_context_data
+    ctx['status_filter'] = form.cleaned_data.get('status', '')
+                           ^^^^^^^^^^^^^^^^^
+AttributeError: 'ProductSearchForm' object has no attribute 'cleaned_data'. Did you mean: 'changed_data'?
+INFO 2025-08-04 04:32:44,074 autoreload 11528 16872 Watching for file changes with StatReloader
+INFO 2025-08-04 04:44:39,867 autoreload 6360 21392 Watching for file changes with StatReloader
+INFO 2025-08-04 04:45:32,445 autoreload 15480 6120 Watching for file changes with StatReloader
+INFO 2025-08-04 04:48:47,233 autoreload 4596 15132 Watching for file changes with StatReloader
+INFO 2025-08-04 05:07:16,915 autoreload 10784 18760 Watching for file changes with StatReloader
+ERROR 2025-08-04 05:24:13,639 log 10784 20524 Internal Server Error: /accounts/suppliers/
+Traceback (most recent call last):
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\contrib\auth\mixins.py", line 73, in dispatch
+    return super().dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\contrib\auth\mixins.py", line 135, in dispatch
+    return super().dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\views\generic\base.py", line 143, in dispatch
+    return handler(request, *args, **kwargs)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\views\generic\list.py", line 178, in get
+    context = self.get_context_data()
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\apps\accounts\views.py", line 229, in get_context_data
+    ctx['status_filter'] = form.cleaned_data.get('status', '')
+                           ^^^^^^^^^^^^^^^^^
+AttributeError: 'SupplierSearchForm' object has no attribute 'cleaned_data'. Did you mean: 'changed_data'?
+ERROR 2025-08-04 05:24:20,866 log 10784 20524 Internal Server Error: /accounts/suppliers/
+Traceback (most recent call last):
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\contrib\auth\mixins.py", line 73, in dispatch
+    return super().dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\contrib\auth\mixins.py", line 135, in dispatch
+    return super().dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\views\generic\base.py", line 143, in dispatch
+    return handler(request, *args, **kwargs)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\views\generic\list.py", line 178, in get
+    context = self.get_context_data()
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\apps\accounts\views.py", line 229, in get_context_data
+    ctx['status_filter'] = form.cleaned_data.get('status', '')
+                           ^^^^^^^^^^^^^^^^^
+AttributeError: 'SupplierSearchForm' object has no attribute 'cleaned_data'. Did you mean: 'changed_data'?
+ERROR 2025-08-04 05:24:33,437 log 10784 17152 Internal Server Error: /accounts/suppliers/
+Traceback (most recent call last):
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\contrib\auth\mixins.py", line 73, in dispatch
+    return super().dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\contrib\auth\mixins.py", line 135, in dispatch
+    return super().dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\views\generic\base.py", line 143, in dispatch
+    return handler(request, *args, **kwargs)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\views\generic\list.py", line 178, in get
+    context = self.get_context_data()
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\apps\accounts\views.py", line 229, in get_context_data
+    ctx['status_filter'] = form.cleaned_data.get('status', '')
+                           ^^^^^^^^^^^^^^^^^
+AttributeError: 'SupplierSearchForm' object has no attribute 'cleaned_data'. Did you mean: 'changed_data'?
+ERROR 2025-08-04 05:24:39,143 log 10784 17152 Internal Server Error: /accounts/suppliers/
+Traceback (most recent call last):
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\contrib\auth\mixins.py", line 73, in dispatch
+    return super().dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\contrib\auth\mixins.py", line 135, in dispatch
+    return super().dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\views\generic\base.py", line 143, in dispatch
+    return handler(request, *args, **kwargs)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\views\generic\list.py", line 178, in get
+    context = self.get_context_data()
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\apps\accounts\views.py", line 229, in get_context_data
+    ctx['status_filter'] = form.cleaned_data.get('status', '')
+                           ^^^^^^^^^^^^^^^^^
+AttributeError: 'SupplierSearchForm' object has no attribute 'cleaned_data'. Did you mean: 'changed_data'?
+INFO 2025-08-04 05:25:21,473 autoreload 21012 19960 Watching for file changes with StatReloader
+ERROR 2025-08-04 05:29:17,504 log 21012 10244 Internal Server Error: /accounts/suppliers/
+Traceback (most recent call last):
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\contrib\auth\mixins.py", line 73, in dispatch
+    return super().dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\contrib\auth\mixins.py", line 135, in dispatch
+    return super().dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\views\generic\base.py", line 143, in dispatch
+    return handler(request, *args, **kwargs)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\views\generic\list.py", line 178, in get
+    context = self.get_context_data()
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\apps\accounts\views.py", line 229, in get_context_data
+    ctx['status_filter'] = form.cleaned_data.get('status', '')
+                           ^^^^^^^^^^^^^^^^^
+AttributeError: 'SupplierSearchForm' object has no attribute 'cleaned_data'. Did you mean: 'changed_data'?
+ERROR 2025-08-04 05:30:52,309 log 21012 7640 Internal Server Error: /accounts/suppliers/
+Traceback (most recent call last):
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\contrib\auth\mixins.py", line 73, in dispatch
+    return super().dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\contrib\auth\mixins.py", line 135, in dispatch
+    return super().dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\views\generic\base.py", line 143, in dispatch
+    return handler(request, *args, **kwargs)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\views\generic\list.py", line 178, in get
+    context = self.get_context_data()
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\apps\accounts\views.py", line 229, in get_context_data
+    ctx['status_filter'] = form.cleaned_data.get('status', '')
+                           ^^^^^^^^^^^^^^^^^
+AttributeError: 'SupplierSearchForm' object has no attribute 'cleaned_data'. Did you mean: 'changed_data'?
+ERROR 2025-08-04 05:31:03,955 log 21012 7640 Internal Server Error: /accounts/suppliers/
+Traceback (most recent call last):
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\contrib\auth\mixins.py", line 73, in dispatch
+    return super().dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\contrib\auth\mixins.py", line 135, in dispatch
+    return super().dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\views\generic\base.py", line 143, in dispatch
+    return handler(request, *args, **kwargs)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\views\generic\list.py", line 178, in get
+    context = self.get_context_data()
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\apps\accounts\views.py", line 229, in get_context_data
+    ctx['status_filter'] = form.cleaned_data.get('status', '')
+                           ^^^^^^^^^^^^^^^^^
+AttributeError: 'SupplierSearchForm' object has no attribute 'cleaned_data'. Did you mean: 'changed_data'?
+INFO 2025-08-04 06:37:58,980 autoreload 19440 2028 Watching for file changes with StatReloader
+INFO 2025-08-04 16:15:00,385 autoreload 8752 19956 Watching for file changes with StatReloader
+INFO 2025-08-04 16:16:39,825 autoreload 16912 20000 Watching for file changes with StatReloader
+ERROR 2025-08-04 16:20:12,762 log 16912 14356 Internal Server Error: /accounts/suppliers/
+Traceback (most recent call last):
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\contrib\auth\mixins.py", line 73, in dispatch
+    return super().dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\contrib\auth\mixins.py", line 135, in dispatch
+    return super().dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\views\generic\base.py", line 143, in dispatch
+    return handler(request, *args, **kwargs)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\views\generic\list.py", line 178, in get
+    context = self.get_context_data()
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\apps\accounts\views.py", line 229, in get_context_data
+    ctx['status_filter'] = form.cleaned_data.get('status', '')
+                           ^^^^^^^^^^^^^^^^^
+AttributeError: 'SupplierSearchForm' object has no attribute 'cleaned_data'. Did you mean: 'changed_data'?
+ERROR 2025-08-04 16:21:46,335 log 16912 14356 Internal Server Error: /accounts/suppliers/
+Traceback (most recent call last):
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\contrib\auth\mixins.py", line 73, in dispatch
+    return super().dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\contrib\auth\mixins.py", line 135, in dispatch
+    return super().dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\views\generic\base.py", line 143, in dispatch
+    return handler(request, *args, **kwargs)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\views\generic\list.py", line 178, in get
+    context = self.get_context_data()
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\apps\accounts\views.py", line 229, in get_context_data
+    ctx['status_filter'] = form.cleaned_data.get('status', '')
+                           ^^^^^^^^^^^^^^^^^
+AttributeError: 'SupplierSearchForm' object has no attribute 'cleaned_data'. Did you mean: 'changed_data'?
+ERROR 2025-08-04 16:22:37,873 log 16912 14356 Internal Server Error: /accounts/suppliers/
+Traceback (most recent call last):
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\contrib\auth\mixins.py", line 73, in dispatch
+    return super().dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\contrib\auth\mixins.py", line 135, in dispatch
+    return super().dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\views\generic\base.py", line 143, in dispatch
+    return handler(request, *args, **kwargs)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\views\generic\list.py", line 178, in get
+    context = self.get_context_data()
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\apps\accounts\views.py", line 229, in get_context_data
+    ctx['status_filter'] = form.cleaned_data.get('status', '')
+                           ^^^^^^^^^^^^^^^^^
+AttributeError: 'SupplierSearchForm' object has no attribute 'cleaned_data'. Did you mean: 'changed_data'?
+ERROR 2025-08-04 16:22:45,927 log 16912 14356 Internal Server Error: /accounts/suppliers/
+Traceback (most recent call last):
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\contrib\auth\mixins.py", line 73, in dispatch
+    return super().dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\contrib\auth\mixins.py", line 135, in dispatch
+    return super().dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\views\generic\base.py", line 143, in dispatch
+    return handler(request, *args, **kwargs)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\views\generic\list.py", line 178, in get
+    context = self.get_context_data()
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\apps\accounts\views.py", line 229, in get_context_data
+    ctx['status_filter'] = form.cleaned_data.get('status', '')
+                           ^^^^^^^^^^^^^^^^^
+AttributeError: 'SupplierSearchForm' object has no attribute 'cleaned_data'. Did you mean: 'changed_data'?
+ERROR 2025-08-04 16:23:07,633 log 16912 14356 Internal Server Error: /accounts/suppliers/
+Traceback (most recent call last):
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\contrib\auth\mixins.py", line 73, in dispatch
+    return super().dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\contrib\auth\mixins.py", line 135, in dispatch
+    return super().dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\views\generic\base.py", line 143, in dispatch
+    return handler(request, *args, **kwargs)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\views\generic\list.py", line 178, in get
+    context = self.get_context_data()
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\apps\accounts\views.py", line 229, in get_context_data
+    ctx['status_filter'] = form.cleaned_data.get('status', '')
+                           ^^^^^^^^^^^^^^^^^
+AttributeError: 'SupplierSearchForm' object has no attribute 'cleaned_data'. Did you mean: 'changed_data'?
+ERROR 2025-08-04 16:25:04,806 log 16912 9328 Internal Server Error: /accounts/suppliers/
+Traceback (most recent call last):
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\contrib\auth\mixins.py", line 73, in dispatch
+    return super().dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\contrib\auth\mixins.py", line 135, in dispatch
+    return super().dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\views\generic\base.py", line 143, in dispatch
+    return handler(request, *args, **kwargs)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\views\generic\list.py", line 178, in get
+    context = self.get_context_data()
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\apps\accounts\views.py", line 229, in get_context_data
+    ctx['status_filter'] = form.cleaned_data.get('status', '')
+                           ^^^^^^^^^^^^^^^^^
+AttributeError: 'SupplierSearchForm' object has no attribute 'cleaned_data'. Did you mean: 'changed_data'?
+ERROR 2025-08-04 16:27:26,033 log 16912 9328 Internal Server Error: /accounts/suppliers/
+Traceback (most recent call last):
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\contrib\auth\mixins.py", line 73, in dispatch
+    return super().dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\contrib\auth\mixins.py", line 135, in dispatch
+    return super().dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\views\generic\base.py", line 143, in dispatch
+    return handler(request, *args, **kwargs)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\views\generic\list.py", line 178, in get
+    context = self.get_context_data()
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\apps\accounts\views.py", line 229, in get_context_data
+    ctx['status_filter'] = form.cleaned_data.get('status', '')
+                           ^^^^^^^^^^^^^^^^^
+AttributeError: 'SupplierSearchForm' object has no attribute 'cleaned_data'. Did you mean: 'changed_data'?
+ERROR 2025-08-04 16:28:11,926 log 16912 9328 Internal Server Error: /accounts/suppliers/
+Traceback (most recent call last):
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\contrib\auth\mixins.py", line 73, in dispatch
+    return super().dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\contrib\auth\mixins.py", line 135, in dispatch
+    return super().dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\views\generic\base.py", line 143, in dispatch
+    return handler(request, *args, **kwargs)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\views\generic\list.py", line 178, in get
+    context = self.get_context_data()
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\apps\accounts\views.py", line 229, in get_context_data
+    ctx['status_filter'] = form.cleaned_data.get('status', '')
+                           ^^^^^^^^^^^^^^^^^
+AttributeError: 'SupplierSearchForm' object has no attribute 'cleaned_data'. Did you mean: 'changed_data'?
+ERROR 2025-08-04 16:51:56,411 log 16912 21304 Internal Server Error: /accounts/suppliers/
+Traceback (most recent call last):
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\contrib\auth\mixins.py", line 73, in dispatch
+    return super().dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\contrib\auth\mixins.py", line 135, in dispatch
+    return super().dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\views\generic\base.py", line 143, in dispatch
+    return handler(request, *args, **kwargs)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\views\generic\list.py", line 178, in get
+    context = self.get_context_data()
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\apps\accounts\views.py", line 229, in get_context_data
+    ctx['status_filter'] = form.cleaned_data.get('status', '')
+                           ^^^^^^^^^^^^^^^^^
+AttributeError: 'SupplierSearchForm' object has no attribute 'cleaned_data'. Did you mean: 'changed_data'?
+ERROR 2025-08-04 16:52:56,352 log 16912 21304 Internal Server Error: /accounts/suppliers/
+Traceback (most recent call last):
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\contrib\auth\mixins.py", line 73, in dispatch
+    return super().dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\contrib\auth\mixins.py", line 135, in dispatch
+    return super().dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\views\generic\base.py", line 143, in dispatch
+    return handler(request, *args, **kwargs)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\views\generic\list.py", line 178, in get
+    context = self.get_context_data()
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\apps\accounts\views.py", line 229, in get_context_data
+    ctx['status_filter'] = form.cleaned_data.get('status', '')
+                           ^^^^^^^^^^^^^^^^^
+AttributeError: 'SupplierSearchForm' object has no attribute 'cleaned_data'. Did you mean: 'changed_data'?
+ERROR 2025-08-04 16:54:11,104 log 16912 21304 Internal Server Error: /accounts/suppliers/
+Traceback (most recent call last):
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\contrib\auth\mixins.py", line 73, in dispatch
+    return super().dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\contrib\auth\mixins.py", line 135, in dispatch
+    return super().dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\views\generic\base.py", line 143, in dispatch
+    return handler(request, *args, **kwargs)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\views\generic\list.py", line 178, in get
+    context = self.get_context_data()
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\apps\accounts\views.py", line 229, in get_context_data
+    ctx['status_filter'] = form.cleaned_data.get('status', '')
+                           ^^^^^^^^^^^^^^^^^
+AttributeError: 'SupplierSearchForm' object has no attribute 'cleaned_data'. Did you mean: 'changed_data'?
+ERROR 2025-08-04 16:54:44,147 log 16912 21304 Internal Server Error: /accounts/suppliers/
+Traceback (most recent call last):
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\contrib\auth\mixins.py", line 73, in dispatch
+    return super().dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\contrib\auth\mixins.py", line 135, in dispatch
+    return super().dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\views\generic\base.py", line 143, in dispatch
+    return handler(request, *args, **kwargs)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\views\generic\list.py", line 178, in get
+    context = self.get_context_data()
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\apps\accounts\views.py", line 229, in get_context_data
+    ctx['status_filter'] = form.cleaned_data.get('status', '')
+                           ^^^^^^^^^^^^^^^^^
+AttributeError: 'SupplierSearchForm' object has no attribute 'cleaned_data'. Did you mean: 'changed_data'?
+ERROR 2025-08-04 16:55:26,833 log 16912 21304 Internal Server Error: /accounts/suppliers/
+Traceback (most recent call last):
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\contrib\auth\mixins.py", line 73, in dispatch
+    return super().dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\contrib\auth\mixins.py", line 135, in dispatch
+    return super().dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\views\generic\base.py", line 143, in dispatch
+    return handler(request, *args, **kwargs)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\views\generic\list.py", line 178, in get
+    context = self.get_context_data()
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\apps\accounts\views.py", line 229, in get_context_data
+    ctx['status_filter'] = form.cleaned_data.get('status', '')
+                           ^^^^^^^^^^^^^^^^^
+AttributeError: 'SupplierSearchForm' object has no attribute 'cleaned_data'. Did you mean: 'changed_data'?
+ERROR 2025-08-04 16:56:00,264 log 16912 21304 Internal Server Error: /accounts/suppliers/
+Traceback (most recent call last):
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\contrib\auth\mixins.py", line 73, in dispatch
+    return super().dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\contrib\auth\mixins.py", line 135, in dispatch
+    return super().dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\views\generic\base.py", line 143, in dispatch
+    return handler(request, *args, **kwargs)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\views\generic\list.py", line 178, in get
+    context = self.get_context_data()
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\apps\accounts\views.py", line 229, in get_context_data
+    ctx['status_filter'] = form.cleaned_data.get('status', '')
+                           ^^^^^^^^^^^^^^^^^
+AttributeError: 'SupplierSearchForm' object has no attribute 'cleaned_data'. Did you mean: 'changed_data'?
+WARNING 2025-08-04 16:56:38,442 log 16912 21304 Not Found: /accounts/suppliers/4/edit/
+ERROR 2025-08-04 16:58:07,152 log 16912 21304 Internal Server Error: /accounts/suppliers/
+Traceback (most recent call last):
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\contrib\auth\mixins.py", line 73, in dispatch
+    return super().dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\contrib\auth\mixins.py", line 135, in dispatch
+    return super().dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\views\generic\base.py", line 143, in dispatch
+    return handler(request, *args, **kwargs)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\views\generic\list.py", line 178, in get
+    context = self.get_context_data()
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\apps\accounts\views.py", line 229, in get_context_data
+    ctx['status_filter'] = form.cleaned_data.get('status', '')
+                           ^^^^^^^^^^^^^^^^^
+AttributeError: 'SupplierSearchForm' object has no attribute 'cleaned_data'. Did you mean: 'changed_data'?
+ERROR 2025-08-04 16:58:41,303 log 16912 21304 Internal Server Error: /accounts/suppliers/
+Traceback (most recent call last):
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\contrib\auth\mixins.py", line 73, in dispatch
+    return super().dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\contrib\auth\mixins.py", line 135, in dispatch
+    return super().dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\views\generic\base.py", line 143, in dispatch
+    return handler(request, *args, **kwargs)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\views\generic\list.py", line 178, in get
+    context = self.get_context_data()
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\apps\accounts\views.py", line 229, in get_context_data
+    ctx['status_filter'] = form.cleaned_data.get('status', '')
+                           ^^^^^^^^^^^^^^^^^
+AttributeError: 'SupplierSearchForm' object has no attribute 'cleaned_data'. Did you mean: 'changed_data'?
+INFO 2025-08-04 17:51:14,387 autoreload 18556 21140 Watching for file changes with StatReloader
+INFO 2025-08-04 17:56:48,814 autoreload 11132 3744 Watching for file changes with StatReloader
+ERROR 2025-08-04 17:57:00,891 log 11132 19164 Internal Server Error: /core/suppliers/
+Traceback (most recent call last):
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\base.py", line 510, in parse
+    compile_func = self.tags[command]
+                   ~~~~~~~~~^^^^^^^^^
+KeyError: 'endfor'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\core\handlers\base.py", line 220, in _get_response
+    response = response.render()
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\response.py", line 90, in rendered_content
+    template = self.resolve_template(self.template_name)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\response.py", line 72, in resolve_template
+    return select_template(template, using=self.using)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\loader.py", line 42, in select_template
+    return engine.get_template(template_name)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\backends\django.py", line 79, in get_template
+    return Template(self.engine.get_template(template_name), self)
+                    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\engine.py", line 177, in get_template
+    template, origin = self.find_template(template_name)
+                       ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\engine.py", line 159, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\loaders\cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\loaders\base.py", line 28, in get_template
+    return Template(
+        contents,
+    ...<2 lines>...
+        self.engine,
+    )
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+                    ~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\base.py", line 196, in compile_nodelist
+    nodelist = parser.parse()
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\base.py", line 518, in parse
+    raise self.error(token, e)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\loader_tags.py", line 299, in do_extends
+    nodelist = parser.parse()
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\base.py", line 518, in parse
+    raise self.error(token, e)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\loader_tags.py", line 234, in do_block
+    nodelist = parser.parse(("endblock",))
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\base.py", line 512, in parse
+    self.invalid_block_tag(token, command, parse_until)
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\base.py", line 567, in invalid_block_tag
+    raise self.error(
+    ...<8 lines>...
+    )
+django.template.exceptions.TemplateSyntaxError: Invalid block tag on line 40: 'endfor', expected 'endblock'. Did you forget to register or load this tag?
+ERROR 2025-08-04 17:57:10,938 log 11132 19164 Internal Server Error: /core/suppliers/
+Traceback (most recent call last):
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\base.py", line 510, in parse
+    compile_func = self.tags[command]
+                   ~~~~~~~~~^^^^^^^^^
+KeyError: 'endfor'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\core\handlers\base.py", line 220, in _get_response
+    response = response.render()
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\response.py", line 90, in rendered_content
+    template = self.resolve_template(self.template_name)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\response.py", line 72, in resolve_template
+    return select_template(template, using=self.using)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\loader.py", line 42, in select_template
+    return engine.get_template(template_name)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\backends\django.py", line 79, in get_template
+    return Template(self.engine.get_template(template_name), self)
+                    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\engine.py", line 177, in get_template
+    template, origin = self.find_template(template_name)
+                       ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\engine.py", line 159, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\loaders\cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\loaders\base.py", line 28, in get_template
+    return Template(
+        contents,
+    ...<2 lines>...
+        self.engine,
+    )
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+                    ~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\base.py", line 196, in compile_nodelist
+    nodelist = parser.parse()
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\base.py", line 518, in parse
+    raise self.error(token, e)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\loader_tags.py", line 299, in do_extends
+    nodelist = parser.parse()
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\base.py", line 518, in parse
+    raise self.error(token, e)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\loader_tags.py", line 234, in do_block
+    nodelist = parser.parse(("endblock",))
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\base.py", line 512, in parse
+    self.invalid_block_tag(token, command, parse_until)
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\base.py", line 567, in invalid_block_tag
+    raise self.error(
+    ...<8 lines>...
+    )
+django.template.exceptions.TemplateSyntaxError: Invalid block tag on line 40: 'endfor', expected 'endblock'. Did you forget to register or load this tag?
+INFO 2025-08-04 18:00:39,057 autoreload 3896 19348 Watching for file changes with StatReloader
+ERROR 2025-08-04 18:00:50,551 log 3896 15708 Internal Server Error: /core/suppliers/
+Traceback (most recent call last):
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\base.py", line 510, in parse
+    compile_func = self.tags[command]
+                   ~~~~~~~~~^^^^^^^^^
+KeyError: 'elif'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\core\handlers\base.py", line 220, in _get_response
+    response = response.render()
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\response.py", line 90, in rendered_content
+    template = self.resolve_template(self.template_name)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\response.py", line 72, in resolve_template
+    return select_template(template, using=self.using)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\loader.py", line 42, in select_template
+    return engine.get_template(template_name)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\backends\django.py", line 79, in get_template
+    return Template(self.engine.get_template(template_name), self)
+                    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\engine.py", line 177, in get_template
+    template, origin = self.find_template(template_name)
+                       ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\engine.py", line 159, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\loaders\cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\loaders\base.py", line 28, in get_template
+    return Template(
+        contents,
+    ...<2 lines>...
+        self.engine,
+    )
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+                    ~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\base.py", line 196, in compile_nodelist
+    nodelist = parser.parse()
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\base.py", line 518, in parse
+    raise self.error(token, e)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\loader_tags.py", line 299, in do_extends
+    nodelist = parser.parse()
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\base.py", line 518, in parse
+    raise self.error(token, e)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\loader_tags.py", line 234, in do_block
+    nodelist = parser.parse(("endblock",))
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\base.py", line 518, in parse
+    raise self.error(token, e)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\defaulttags.py", line 862, in do_for
+    nodelist_loop = parser.parse(
+        (
+    ...<2 lines>...
+        )
+    )
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\base.py", line 518, in parse
+    raise self.error(token, e)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\defaulttags.py", line 962, in do_if
+    nodelist = parser.parse(("elif", "else", "endif"))
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\base.py", line 518, in parse
+    raise self.error(token, e)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\defaulttags.py", line 1540, in do_with
+    nodelist = parser.parse(("endwith",))
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\base.py", line 518, in parse
+    raise self.error(token, e)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\defaulttags.py", line 1540, in do_with
+    nodelist = parser.parse(("endwith",))
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\base.py", line 518, in parse
+    raise self.error(token, e)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\defaulttags.py", line 1540, in do_with
+    nodelist = parser.parse(("endwith",))
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\base.py", line 512, in parse
+    self.invalid_block_tag(token, command, parse_until)
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\base.py", line 567, in invalid_block_tag
+    raise self.error(
+    ...<8 lines>...
+    )
+django.template.exceptions.TemplateSyntaxError: Invalid block tag on line 27: 'elif', expected 'endwith'. Did you forget to register or load this tag?
+INFO 2025-08-04 18:22:22,724 autoreload 10252 16076 Watching for file changes with StatReloader
+ERROR 2025-08-04 18:22:31,658 log 10252 19380 Internal Server Error: /core/suppliers/
+Traceback (most recent call last):
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\smartif.py", line 180, in translate_token
+    op = OPERATORS[token]
+         ~~~~~~~~~^^^^^^^
+KeyError: "supplier.status=='ACTIVE'"
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\core\handlers\base.py", line 220, in _get_response
+    response = response.render()
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\response.py", line 90, in rendered_content
+    template = self.resolve_template(self.template_name)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\response.py", line 72, in resolve_template
+    return select_template(template, using=self.using)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\loader.py", line 42, in select_template
+    return engine.get_template(template_name)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\backends\django.py", line 79, in get_template
+    return Template(self.engine.get_template(template_name), self)
+                    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\engine.py", line 177, in get_template
+    template, origin = self.find_template(template_name)
+                       ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\engine.py", line 159, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\loaders\cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\loaders\base.py", line 28, in get_template
+    return Template(
+        contents,
+    ...<2 lines>...
+        self.engine,
+    )
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+                    ~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\base.py", line 196, in compile_nodelist
+    nodelist = parser.parse()
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\base.py", line 518, in parse
+    raise self.error(token, e)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\loader_tags.py", line 299, in do_extends
+    nodelist = parser.parse()
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\base.py", line 518, in parse
+    raise self.error(token, e)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\loader_tags.py", line 234, in do_block
+    nodelist = parser.parse(("endblock",))
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\base.py", line 518, in parse
+    raise self.error(token, e)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\defaulttags.py", line 862, in do_for
+    nodelist_loop = parser.parse(
+        (
+    ...<2 lines>...
+        )
+    )
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\base.py", line 518, in parse
+    raise self.error(token, e)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\defaulttags.py", line 961, in do_if
+    condition = TemplateIfParser(parser, bits).parse()
+                ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\defaulttags.py", line 894, in __init__
+    super().__init__(*args, **kwargs)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\smartif.py", line 171, in __init__
+    mapped_tokens.append(self.translate_token(token))
+                         ~~~~~~~~~~~~~~~~~~~~^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\smartif.py", line 182, in translate_token
+    return self.create_var(token)
+           ~~~~~~~~~~~~~~~^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\defaulttags.py", line 897, in create_var
+    return TemplateLiteral(self.template_parser.compile_filter(value), value)
+                           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\base.py", line 609, in compile_filter
+    return FilterExpression(token, self)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\base.py", line 710, in __init__
+    raise TemplateSyntaxError(
+    ...<2 lines>...
+    )
+django.template.exceptions.TemplateSyntaxError: Could not parse the remainder: '=='ACTIVE'' from 'supplier.status=='ACTIVE''
+INFO 2025-08-04 18:23:13,256 autoreload 10988 6204 Watching for file changes with StatReloader
+ERROR 2025-08-04 18:23:22,004 log 10988 17644 Internal Server Error: /core/suppliers/
+Traceback (most recent call last):
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\base.py", line 510, in parse
+    compile_func = self.tags[command]
+                   ~~~~~~~~~^^^^^^^^^
+KeyError: 'endfor'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\core\handlers\base.py", line 220, in _get_response
+    response = response.render()
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\response.py", line 90, in rendered_content
+    template = self.resolve_template(self.template_name)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\response.py", line 72, in resolve_template
+    return select_template(template, using=self.using)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\loader.py", line 42, in select_template
+    return engine.get_template(template_name)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\backends\django.py", line 79, in get_template
+    return Template(self.engine.get_template(template_name), self)
+                    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\engine.py", line 177, in get_template
+    template, origin = self.find_template(template_name)
+                       ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\engine.py", line 159, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\loaders\cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\loaders\base.py", line 28, in get_template
+    return Template(
+        contents,
+    ...<2 lines>...
+        self.engine,
+    )
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+                    ~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\base.py", line 196, in compile_nodelist
+    nodelist = parser.parse()
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\base.py", line 518, in parse
+    raise self.error(token, e)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\loader_tags.py", line 299, in do_extends
+    nodelist = parser.parse()
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\base.py", line 518, in parse
+    raise self.error(token, e)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\loader_tags.py", line 234, in do_block
+    nodelist = parser.parse(("endblock",))
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\base.py", line 512, in parse
+    self.invalid_block_tag(token, command, parse_until)
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\base.py", line 567, in invalid_block_tag
+    raise self.error(
+    ...<8 lines>...
+    )
+django.template.exceptions.TemplateSyntaxError: Invalid block tag on line 40: 'endfor', expected 'endblock'. Did you forget to register or load this tag?
+INFO 2025-08-04 18:23:40,633 autoreload 6388 14956 Watching for file changes with StatReloader

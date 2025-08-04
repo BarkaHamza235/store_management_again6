@@ -1,40 +1,48 @@
+# apps/accounts/urls.py
+
 from django.urls import path
 from . import views
-from django.urls import path
-from django.contrib.auth import views as auth_views  ##### import auth_views
-from .views import (
-    UserLoginView, UserLogoutView, UserRegisterView,   ##### ajout UserRegisterView
-    EmployeeListView, EmployeeCreateView, EmployeeUpdateView,
-    EmployeeDetailView, EmployeeDeleteView, EmployeeToggleStatusView
-)
 
 app_name = 'accounts'
 
 urlpatterns = [
-    # Connexion
-    path('login/', views.UserLoginView.as_view(), name='login'),
-
-    # Inscription
+    # Authentification
+    path('login/',    views.UserLoginView.as_view(),    name='login'),
     path('register/', views.UserRegisterView.as_view(), name='register'),
+    path('logout/',   views.UserLogoutView.as_view(),   name='logout'),
 
-    # Déconnexion (vue personnalisée, redirection assurée)
-    path('logout/', views.UserLogoutView.as_view(), name='logout'),
+    # Réinitialisation de mot de passe
+    path('password-reset/',                      views.CustomPasswordResetView.as_view(),         name='password_reset'),
+    path('password-reset/done/',                 views.CustomPasswordResetDoneView.as_view(),     name='password_reset_done'),
+    path('password-reset/confirm/<uidb64>/<token>/', views.CustomPasswordResetConfirmView.as_view(),  name='password_reset_confirm'),
+    path('password-reset/complete/',             views.CustomPasswordResetCompleteView.as_view(), name='password_reset_complete'),
 
-    # Mot de passe oublié (password-reset)
-    path('password-reset/', views.CustomPasswordResetView.as_view(), name='password_reset'),
-    path('password-reset/done/', views.CustomPasswordResetDoneView.as_view(), name='password_reset_done'),
-    path('reset/<uidb64>/<token>/', views.CustomPasswordResetConfirmView.as_view(), name='password_reset_confirm'),
-    path('reset/done/', views.CustomPasswordResetCompleteView.as_view(), name='password_reset_complete'),
+    # CRUD Employés
+    path('employees/',                   views.EmployeeListView.as_view(),          name='employee_list'),
+    path('employees/add/',               views.EmployeeCreateView.as_view(),        name='employee_add'),
+    path('employees/<int:pk>/',          views.EmployeeDetailView.as_view(),        name='employee_detail'),
+    path('employees/<int:pk>/edit/',     views.EmployeeUpdateView.as_view(),        name='employee_edit'),
+    path('employees/<int:pk>/delete/',   views.EmployeeDeleteView.as_view(),        name='employee_delete'),
+    path('employees/<int:pk>/toggle-status/', views.EmployeeToggleStatusView.as_view(), name='employee_toggle_status'),
 
+    # CRUD Fournisseurs
+    path('suppliers/',                  views.SupplierListView.as_view(),          name='supplier_list'),
+    path('suppliers/add/',              views.SupplierCreateView.as_view(),        name='supplier_add'),
+    path('suppliers/<int:pk>/',         views.SupplierDetailView.as_view(),        name='supplier_detail'),
+    path('suppliers/<int:pk>/edit/',    views.SupplierUpdateView.as_view(),        name='supplier_edit'),
+    path('suppliers/<int:pk>/delete/',  views.SupplierDeleteView.as_view(),        name='supplier_delete'),
 
-    # Gestion employés
-    path('employees/', EmployeeListView.as_view(), name='employee_list'),
-    path('employees/add/', EmployeeCreateView.as_view(), name='employee_add'),
-    path('employees/<int:pk>/', EmployeeDetailView.as_view(), name='employee_detail'),
-    path('employees/<int:pk>/edit/', EmployeeUpdateView.as_view(), name='employee_edit'),
-    path('employees/<int:pk>/delete/', EmployeeDeleteView.as_view(), name='employee_delete'),
-    path('employees/<int:pk>/toggle-status/', EmployeeToggleStatusView.as_view(), name='employee_toggle_status'),
+    # CRUD Catégories
+    path('categories/',                 views.CategoryListView.as_view(),          name='category_list'),
+    path('categories/add/',             views.CategoryCreateView.as_view(),        name='category_add'),
+    path('categories/<int:pk>/',        views.CategoryDetailView.as_view(),        name='category_detail'),
+    path('categories/<int:pk>/edit/',   views.CategoryUpdateView.as_view(),        name='category_edit'),
+    path('categories/<int:pk>/delete/', views.CategoryDeleteView.as_view(),        name='category_delete'),
+
+    # CRUD Produits
+    path('products/',                   views.ProductListView.as_view(),           name='product_list'),
+    path('products/add/',               views.ProductCreateView.as_view(),         name='product_add'),
+    path('products/<int:pk>/',          views.ProductDetailView.as_view(),         name='product_detail'),
+    path('products/<int:pk>/edit/',     views.ProductUpdateView.as_view(),         name='product_edit'),
+    path('products/<int:pk>/delete/',   views.ProductDeleteView.as_view(),         name='product_delete'),
 ]
-
-
-
