@@ -23,3 +23,4 @@ urlpatterns = [
     path('dashboard/', lambda r: redirect('core:dashboard'), name='dashboard_redirect'),
     path('caisse/', lambda r: redirect('core:caisse'), name='caisse_redirect'),
 ]
+

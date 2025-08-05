@@ -2,6 +2,10 @@
 
 from django.urls import path
 from . import views
+from django.urls import path
+from .views import (
+    SaleListView, sale_create, sale_update, SaleDetailView, SaleDeleteView
+)
 
 app_name = 'accounts'
 
@@ -45,4 +49,13 @@ urlpatterns = [
     path('products/<int:pk>/',          views.ProductDetailView.as_view(),         name='product_detail'),
     path('products/<int:pk>/edit/',     views.ProductUpdateView.as_view(),         name='product_edit'),
     path('products/<int:pk>/delete/',   views.ProductDeleteView.as_view(),         name='product_delete'),
+
+
+    # Ventes
+    path('sales/', SaleListView.as_view(), name='sale_list'),
+    path('sales/add/', sale_create, name='sale_create'),
+    path('sales/<int:pk>/', SaleDetailView.as_view(), name='sale_detail'),
+    path('sales/<int:pk>/edit/', sale_update, name='sale_update'),
+    path('sales/<int:pk>/delete/', SaleDeleteView.as_view(), name='sale_delete'),
+
 ]

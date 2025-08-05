@@ -1,0 +1,112 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}Gestion des Ventes{% endblock %}
+
+{% block content %}
+<div class="container-fluid py-3">
+
+  <!-- Barre d’action -->
+  <div class="d-flex align-items-center mb-3">
+    <a href="{% url 'core:dashboard' %}" class="btn btn-outline-secondary me-2">
+      <i class="fas fa-arrow-left"></i> Retour au Dashboard
+    </a>
+    <form method="get" class="me-2 mb-0">
+      <button class="btn btn-primary"><i class="fas fa-sync-alt"></i> Actualiser</button>
+    </form>
+  </div>
+
+  <!-- Filtres et Recherche -->
+  <div class="card mb-3">
+    <div class="card-header fw-bold"><i class="fas fa-filter"></i> Filtres et Recherche</div>
+    <div class="card-body">
+      <form method="get" class="row g-3 align-items-end">
+        <div class="col-md-2">
+          <label class="form-label">N° Facture:</label>
+          {{ search_form.invoice_number }}
+        </div>
+        <div class="col-md-2">
+          <label class="form-label">Employé:</label>
+          {{ search_form.cashier }}
+        </div>
+        <div class="col-md-2">
+          <label class="form-label">Période  Du:</label>
+          {{ search_form.date_from }}
+        </div>
+        <div class="col-md-2">
+          <label class="form-label">Au:</label>
+          {{ search_form.date_to }}
+        </div>
+        <div class="col-md-2">
+          <label class="form-label">Statut:</label>
+          {{ search_form.status }}
+        </div>
+        <div class="col-md-2">
+          <button class="btn btn-primary w-100">
+            <i class="fas fa-search"></i> Rechercher
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Contenu principal -->
+  <div class="row">
+    <!-- Panneau Liste -->
+    <div class="col-lg-7">
+      <div class="card h-100">
+        <div class="card-header fw-bold">
+          <i class="fas fa-list"></i> Liste des Ventes
+          <span class="float-end text-success">
+            Total: {{ page_obj.paginator.count }} ventes | Chiffre d'affaires: {{ total_revenue }} €
+          </span>
+        </div>
+        <div class="table-responsive card-body" style="max-height:450px;overflow-y:auto;">
+          <table class="table table-sm table-hover align-middle mb-0">
+            <thead class="table-light">
+              <tr>
+                <th>N° Facture</th>
+                <th>Date</th>
+                <th>Employé</th>
+                <th>Total</th>
+                <th>Articles</th>
+                <th>Heure</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for sale in sales %}
+              <tr style="cursor:pointer"
+                  onclick="window.location.href='{% url 'accounts:sale_detail' sale.pk %}'">
+                <td>{{ sale.invoice_number }}</td>
+                <td>{{ sale.date|date:"d/m/Y" }}</td>
+                <td>{{ sale.cashier.get_full_name }}</td>
+                <td>{{ sale.total_amount }} €</td>
+                <td>{{ sale.items.count }}</td>
+                <td>{{ sale.date|time:"H:i" }}</td>
+              </tr>
+              {% empty %}
+              <tr>
+                <td colspan="6" class="text-center">Aucune vente trouvée.</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+        <div class="card-footer">
+          {% include 'pagination.html' with page_obj=page_obj request=request %}
+        </div>
+      </div>
+    </div>
+
+    <!-- Panneau Détail -->
+    <div class="col-lg-5 mt-3 mt-lg-0">
+      <div class="card h-100">
+        <div class="card-header fw-bold"><i class="fas fa-info-circle"></i> Détails de la Vente</div>
+        <div class="card-body" id="sale-detail">
+          <p>Sélectionnez une vente dans la liste pour afficher les détails ici.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

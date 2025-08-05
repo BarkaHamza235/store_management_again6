@@ -33,4 +33,9 @@ urlpatterns = [
     path('suppliers/<int:pk>/', views.SupplierDetailView.as_view(), name='supplier_detail'),
     path('suppliers/<int:pk>/edit/', views.SupplierUpdateView.as_view(), name='supplier_update'),
     path('suppliers/<int:pk>/delete/', views.SupplierDeleteView.as_view(), name='supplier_delete'),
+
+    #caisse
+    path('caisse/checkout/', login_required(views.caisse_checkout), name='caisse_checkout'),
+
 ]
+

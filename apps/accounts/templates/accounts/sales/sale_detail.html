@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block title %}Détails Vente {{ sale.invoice_number }}{% endblock %}
+{% block content %}
+<div class="container py-4">
+  <h1>Détails de la vente {{ sale.invoice_number }}</h1>
+  <p><strong>Date :</strong> {{ sale.date|date:"d/m/Y H:i" }}</p>
+  <p><strong>Caissier :</strong> {{ sale.cashier.get_full_name }}</p>
+  <p><strong>Client :</strong> {{ sale.customer_name }}</p>
+  <p><strong>Statut :</strong> {{ sale.get_status_display }}</p>
+
+  <h5>Lignes de vente</h5>
+  <table class="table">
+    <thead><tr><th>Produit</th><th>Qté</th><th>PU (€)</th><th>Total (€)</th></tr></thead>
+    <tbody>
+      {% for item in sale.items.all %}
+      <tr>
+        <td>{{ item.product.name }}</td>
+        <td>{{ item.quantity }}</td>
+        <td>{{ item.unit_price }}</td>
+        <td>{{ item.line_total }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <p class="text-end"><strong>Montant total : {{ sale.total_amount }}€</strong></p>
+
+  <a href="{% url 'accounts:sale_list' %}" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Retour</a>
+  <a href="{% url 'accounts:sale_update' sale.pk %}" class="btn btn-primary"><i class="fas fa-edit"></i> Modifier</a>
+</div>
+{% endblock %}

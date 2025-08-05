@@ -212,3 +212,39 @@ class Product(models.Model):
 
     def is_in_stock(self):
         return self.stock_quantity > 0 and self.status == self.Status.ACTIVE
+
+
+#ventes
+from django.db import models
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
+
+class Sale(models.Model):
+    class Status(models.TextChoices):
+        PAID = "PAID", "Payé"
+        REFUNDED = "REFUNDED", "Remboursé"
+        CANCELLED = "CANCELLED", "Annulé"
+
+    invoice_number = models.CharField(max_length=20, unique=True, verbose_name="N° facture")
+    date = models.DateTimeField(auto_now_add=True, verbose_name="Date de vente")
+    cashier = models.ForeignKey(User, on_delete=models.PROTECT, verbose_name="Caissier")
+    customer_name = models.CharField(max_length=100, verbose_name="Client")
+    status = models.CharField(max_length=20, choices=Status.choices, default=Status.PAID, verbose_name="Statut")
+    total_amount = models.DecimalField(max_digits=10, decimal_places=2, verbose_name="Montant total")
+
+    def __str__(self):
+        return f"{self.invoice_number} - {self.customer_name}"
+
+class SaleItem(models.Model):
+    sale = models.ForeignKey(Sale, on_delete=models.CASCADE, related_name="items")
+    product = models.ForeignKey("Product", on_delete=models.PROTECT, verbose_name="Produit")
+    quantity = models.PositiveIntegerField(verbose_name="Quantité")
+    unit_price = models.DecimalField(max_digits=10, decimal_places=2, verbose_name="Prix unitaire")
+
+    @property
+    def line_total(self):
+        return self.quantity * self.unit_price
+
+    def __str__(self):
+        return f"{self.product.name} x{self.quantity}"

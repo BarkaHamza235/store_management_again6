@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}{% if object %}Modifier Vente{% else %}Nouvelle Vente{% endif %}{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+  <h1>{% if object %}Modifier Vente{% else %}Nouvelle Vente{% endif %}</h1>
+  <form method="post">
+    {% csrf_token %}
+    <fieldset class="mb-3">
+      {{ form|crispy }}
+    </fieldset>
+    <h5>Lignes de vente</h5>
+    {{ formset.management_form }}
+    <table class="table mb-3">
+      <thead><tr><th>Produit</th><th>Quantité</th><th>PU (€)</th><th>Action</th></tr></thead>
+      <tbody>
+        {% for f in formset %}
+        <tr>
+          <td>{{ f.product }}</td>
+          <td>{{ f.quantity }}</td>
+          <td>{{ f.unit_price }}</td>
+          <td>{{ f.DELETE }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Enregistrer</button>
+    <a href="{% url 'accounts:sale_list' %}" class="btn btn-secondary"><i class="fas fa-times"></i> Annuler</a>
+  </form>
+</div>
+{% endblock %}

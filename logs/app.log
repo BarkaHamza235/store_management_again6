@@ -2285,3 +2285,212 @@ Traceback (most recent call last):
     )
 django.template.exceptions.TemplateSyntaxError: Invalid block tag on line 40: 'endfor', expected 'endblock'. Did you forget to register or load this tag?
 INFO 2025-08-04 18:23:40,633 autoreload 6388 14956 Watching for file changes with StatReloader
+INFO 2025-08-04 20:26:55,505 autoreload 17872 20936 Watching for file changes with StatReloader
+ERROR 2025-08-04 20:26:59,457 log 17872 18852 Internal Server Error: /
+Traceback (most recent call last):
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\store_manager\urls.py", line 7, in root_redirect
+    return redirect('accounts:login')
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\shortcuts.py", line 51, in redirect
+    resolve_url(to, *args, **kwargs),
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\shortcuts.py", line 184, in resolve_url
+    return reverse(to, args=args, kwargs=kwargs)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\urls\base.py", line 98, in reverse
+    resolved_url = resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\urls\resolvers.py", line 831, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'login' not found. 'login' is not a valid view function or pattern name.
+INFO 2025-08-04 21:47:40,278 autoreload 12556 11920 Watching for file changes with StatReloader
+ERROR 2025-08-04 21:55:43,998 log 12556 2500 Internal Server Error: /accounts/sales/
+Traceback (most recent call last):
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\backends\django.py", line 107, in render
+    return self.template.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\base.py", line 171, in render
+    return self._render(context)
+           ~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\loader_tags.py", line 159, in render
+    return compiled_parent._render(context)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\loader_tags.py", line 65, in render
+    result = block.nodelist.render(context)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\loader_tags.py", line 199, in render
+    template = context.template.engine.select_template(template_name)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\engine.py", line 214, in select_template
+    raise TemplateDoesNotExist(", ".join(not_found))
+django.template.exceptions.TemplateDoesNotExist: pagination.html
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\core\handlers\base.py", line 220, in _get_response
+    response = response.render()
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\response.py", line 92, in rendered_content
+    return template.render(context, self._request)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\backends\django.py", line 109, in render
+    reraise(exc, self.backend)
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\backends\django.py", line 130, in reraise
+    raise new from exc
+django.template.exceptions.TemplateDoesNotExist: pagination.html
+INFO 2025-08-04 22:00:07,858 autoreload 14616 13068 Watching for file changes with StatReloader
+INFO 2025-08-04 23:03:00,772 autoreload 7240 16580 Watching for file changes with StatReloader
+INFO 2025-08-04 23:17:22,586 autoreload 9908 19200 Watching for file changes with StatReloader
+ERROR 2025-08-04 23:17:38,562 log 9908 19648 Internal Server Error: /accounts/sales/
+Traceback (most recent call last):
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\core\handlers\base.py", line 220, in _get_response
+    response = response.render()
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\response.py", line 92, in rendered_content
+    return template.render(context, self._request)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\backends\django.py", line 107, in render
+    return self.template.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\base.py", line 171, in render
+    return self._render(context)
+           ~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\loader_tags.py", line 159, in render
+    return compiled_parent._render(context)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\loader_tags.py", line 65, in render
+    result = block.nodelist.render(context)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\defaulttags.py", line 480, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\urls\base.py", line 98, in reverse
+    resolved_url = resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\urls\resolvers.py", line 831, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'sale_export' not found. 'sale_export' is not a valid view function or pattern name.
+INFO 2025-08-04 23:26:34,628 autoreload 18816 11356 Watching for file changes with StatReloader
+INFO 2025-08-04 23:34:05,886 autoreload 16288 5004 Watching for file changes with StatReloader
+INFO 2025-08-04 23:36:28,293 autoreload 10392 16240 Watching for file changes with StatReloader
+INFO 2025-08-04 23:40:58,642 autoreload 19172 17600 Watching for file changes with StatReloader
+INFO 2025-08-05 00:13:43,227 autoreload 18652 17716 Watching for file changes with StatReloader
+INFO 2025-08-05 00:43:54,158 autoreload 14528 18472 Watching for file changes with StatReloader
+INFO 2025-08-05 00:47:11,956 autoreload 17612 3360 Watching for file changes with StatReloader
+INFO 2025-08-05 01:43:33,924 autoreload 21416 17608 Watching for file changes with StatReloader
+INFO 2025-08-05 01:54:47,282 autoreload 20152 3252 Watching for file changes with StatReloader
+INFO 2025-08-05 01:55:14,236 autoreload 16224 2296 Watching for file changes with StatReloader
+INFO 2025-08-05 01:58:44,130 autoreload 19328 3200 Watching for file changes with StatReloader
+INFO 2025-08-05 02:14:12,693 autoreload 6156 18276 Watching for file changes with StatReloader
+INFO 2025-08-05 02:33:16,228 autoreload 13344 15696 Watching for file changes with StatReloader
+INFO 2025-08-05 02:41:43,543 autoreload 18428 20316 Watching for file changes with StatReloader
+ERROR 2025-08-05 02:41:47,359 log 18428 17944 Internal Server Error: /core/dashboard/
+Traceback (most recent call last):
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\core\handlers\base.py", line 220, in _get_response
+    response = response.render()
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\response.py", line 92, in rendered_content
+    return template.render(context, self._request)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\backends\django.py", line 107, in render
+    return self.template.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\base.py", line 171, in render
+    return self._render(context)
+           ~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\loader_tags.py", line 159, in render
+    return compiled_parent._render(context)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\loader_tags.py", line 65, in render
+    result = block.nodelist.render(context)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\template\defaulttags.py", line 480, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\urls\base.py", line 98, in reverse
+    resolved_url = resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again2\venv\Lib\site-packages\django\urls\resolvers.py", line 831, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'supplier_list' not found. 'supplier_list' is not a valid view function or pattern name.
+INFO 2025-08-05 02:45:40,045 autoreload 4600 14672 Watching for file changes with StatReloader
+INFO 2025-08-05 02:48:15,824 autoreload 14784 3896 Watching for file changes with StatReloader

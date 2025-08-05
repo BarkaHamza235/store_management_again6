@@ -455,3 +455,99 @@ class ProductDeleteView(LoginRequiredMixin, AdminRequiredMixin, DeleteView):
         response = super().delete(request, *args, **kwargs)
         messages.success(request, f"Produit '{name}' supprimé !")
         return response
+
+
+
+# ====================== CRUD PRODUITS ======================
+
+from django.shortcuts import redirect, get_object_or_404, render
+from django.urls import reverse_lazy
+from django.contrib import messages
+from django.views.generic import ListView, DetailView, DeleteView
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+
+from .forms import SaleSearchForm, SaleForm, SaleItemFormSet
+from apps.core.models import Sale
+
+class AdminRequiredMixin(UserPassesTestMixin):
+    def test_func(self):
+        return self.request.user.is_authenticated and self.request.user.is_admin()
+    def handle_no_permission(self):
+        messages.error(self.request, "Accès refusé : administrateurs uniquement.")
+        return redirect('accounts:login')
+
+class SaleListView(LoginRequiredMixin, AdminRequiredMixin, ListView):
+    model = Sale
+    template_name = 'accounts/sales/sale_list.html'
+    context_object_name = 'sales'
+    paginate_by = 15
+
+    def get_queryset(self):
+        qs = Sale.objects.select_related('cashier').order_by('-date')
+        form = SaleSearchForm(self.request.GET)
+        if form.is_valid():
+            if form.cleaned_data['invoice_number']:
+                qs = qs.filter(invoice_number__icontains=form.cleaned_data['invoice_number'])
+            if form.cleaned_data['cashier']:
+                qs = qs.filter(cashier=form.cleaned_data['cashier'])
+            if form.cleaned_data['status']:
+                qs = qs.filter(status=form.cleaned_data['status'])
+            if form.cleaned_data['date_from']:
+                qs = qs.filter(date__date__gte=form.cleaned_data['date_from'])
+            if form.cleaned_data['date_to']:
+                qs = qs.filter(date__date__lte=form.cleaned_data['date_to'])
+        return qs
+
+    def get_context_data(self, **kwargs):
+        ctx = super().get_context_data(**kwargs)
+        ctx['search_form'] = SaleSearchForm(self.request.GET)
+        ctx['total_revenue'] = sum(s.total_amount for s in ctx['sales'])
+        return ctx
+
+def sale_create(request):
+    if request.method == 'POST':
+        form = SaleForm(request.POST)
+        formset = SaleItemFormSet(request.POST)
+        if form.is_valid() and formset.is_valid():
+            sale = form.save()
+            formset.instance = sale
+            formset.save()
+            sale.total_amount = sum(item.line_total for item in sale.items.all())
+            sale.save()
+            messages.success(request, f"Vente {sale.invoice_number} enregistrée.")
+            return redirect('accounts:sale_list')
+    else:
+        form = SaleForm()
+        formset = SaleItemFormSet()
+    return render(request, 'accounts/sales/sale_form.html', {'form': form, 'formset': formset})
+
+def sale_update(request, pk):
+    sale = get_object_or_404(Sale, pk=pk)
+    if request.method == 'POST':
+        form = SaleForm(request.POST, instance=sale)
+        formset = SaleItemFormSet(request.POST, instance=sale)
+        if form.is_valid() and formset.is_valid():
+            form.save()
+            formset.save()
+            sale.total_amount = sum(item.line_total for item in sale.items.all())
+            sale.save()
+            messages.success(request, f"Vente {sale.invoice_number} mise à jour.")
+            return redirect('accounts:sale_detail', pk=sale.pk)
+    else:
+        form = SaleForm(instance=sale)
+        formset = SaleItemFormSet(instance=sale)
+    return render(request, 'accounts/sales/sale_form.html', {'form': form, 'formset': formset, 'object': sale})
+
+class SaleDetailView(LoginRequiredMixin, AdminRequiredMixin, DetailView):
+    model = Sale
+    template_name = 'accounts/sales/sale_detail.html'
+    context_object_name = 'sale'
+
+class SaleDeleteView(LoginRequiredMixin, AdminRequiredMixin, DeleteView):
+    model = Sale
+    template_name = 'accounts/sales/sale_confirm_delete.html'
+    success_url = reverse_lazy('accounts:sale_list')
+    def delete(self, request, *args, **kwargs):
+        sale = self.get_object()
+        messages.success(request, f"Vente {sale.invoice_number} supprimée.")
+        return super().delete(request, *args, **kwargs)

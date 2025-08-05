@@ -152,7 +152,7 @@ class RegisterForm(UserCreationForm):
             logger.info(f"Nouvel utilisateur créé: {user.username} ({user.get_role_display()})")
         return user
 
-###employés
+# ===== EMPLOYES ===== #
 
 class EmployeeCreateForm(UserCreationForm):
     """Formulaire de création d'employé"""
@@ -231,7 +231,7 @@ class EmployeeSearchForm(forms.Form):
     status = forms.ChoiceField(choices=[('','Tous les statuts'),('active','Actifs'),('inactive','Inactifs')],
         required=False, widget=forms.Select(attrs={'class':'form-control'}), label="")
 
-# ===== FOURNISSEURS =====
+# ===== FOURNISSEURS ===== #
 
 from django import forms
 from apps.core.models import Supplier
@@ -285,7 +285,7 @@ class SupplierSearchForm(forms.Form):
 
 
 
-
+# ===== CATEGORIE ===== #
 from apps.core.models import Category
 
 class CategoryCreateForm(forms.ModelForm):
@@ -308,7 +308,7 @@ class CategorySearchForm(forms.Form):
     )
 
 
-
+# ===== PRODUIT===== #
 from apps.core.models import Product
 
 class ProductCreateForm(forms.ModelForm):
@@ -348,3 +348,39 @@ class ProductSearchForm(forms.Form):
         choices=[('', 'Tous les statuts')] + list(Product.Status.choices),
         widget=forms.Select(attrs={'class':'form-select'})
     )
+
+
+
+# ===== VENTES ===== #
+from django import forms
+from apps.core.models import Sale, SaleItem, Product
+from django.forms.models import inlineformset_factory
+
+class SaleSearchForm(forms.Form):
+    invoice_number = forms.CharField(required=False, label="N° facture", widget=forms.TextInput(attrs={'class':'form-control','placeholder':'N° facture…'}))
+    cashier = forms.ModelChoiceField(queryset=Sale._meta.get_field('cashier').remote_field.model.objects.all(), required=False, widget=forms.Select(attrs={'class':'form-select'}), label="Caissier")
+    date_from = forms.DateField(required=False, widget=forms.DateInput(attrs={'type':'date','class':'form-control'}), label="Du")
+    date_to = forms.DateField(required=False, widget=forms.DateInput(attrs={'type':'date','class':'form-control'}), label="Au")
+    status = forms.ChoiceField(required=False, choices=[('', 'Tous')] + list(Sale.Status.choices), widget=forms.Select(attrs={'class':'form-select'}), label="Statut")
+
+class SaleForm(forms.ModelForm):
+    class Meta:
+        model = Sale
+        fields = ['invoice_number', 'cashier', 'customer_name', 'status']
+        widgets = {
+            'invoice_number': forms.TextInput(attrs={'class':'form-control'}),
+            'cashier': forms.Select(attrs={'class':'form-select'}),
+            'customer_name': forms.TextInput(attrs={'class':'form-control'}),
+            'status': forms.Select(attrs={'class':'form-select'}),
+        }
+
+SaleItemFormSet = inlineformset_factory(
+    Sale, SaleItem,
+    fields=['product','quantity','unit_price'],
+    extra=1, can_delete=True,
+    widgets={
+        'product': forms.Select(attrs={'class':'form-select'}),
+        'quantity': forms.NumberInput(attrs={'class':'form-control','min':1}),
+        'unit_price': forms.NumberInput(attrs={'class':'form-control','step':'0.01'}),
+    }
+)

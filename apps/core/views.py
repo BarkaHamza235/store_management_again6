@@ -1,8 +1,19 @@
-from django.shortcuts import render, redirect
-from django.views.generic import TemplateView, View
+# apps/core/views.py
+
+import json
+from django.shortcuts import render, redirect, get_object_or_404
+from django.views.generic import TemplateView, View, ListView, CreateView, UpdateView, DeleteView, DetailView
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.http import JsonResponse
+from django.urls import reverse_lazy
+from django.contrib import messages
+from django.db.models import Q
+
+from .models import Supplier, Sale, SaleItem, Product
+
 
 class DashboardView(LoginRequiredMixin, TemplateView):
     """Vue du tableau de bord pour les administrateurs"""
@@ -20,6 +31,7 @@ class DashboardView(LoginRequiredMixin, TemplateView):
         context['user_role'] = 'Administrateur'
         return context
 
+
 class CaisseView(LoginRequiredMixin, TemplateView):
     """Vue de l'interface caisse pour les caissiers"""
     template_name = 'core/caisse.html'
@@ -28,147 +40,167 @@ class CaisseView(LoginRequiredMixin, TemplateView):
         context = super().get_context_data(**kwargs)
         context['page_title'] = 'Point de Vente - Store Manager'
         context['user_role'] = 'Caissier'
+        context['products'] = Product.objects.filter(status=Product.Status.ACTIVE)
         return context
+
 
 @method_decorator(login_required, name='dispatch')
 class HomeRedirectView(View):
-    """Redirige intelligemment selon le rôle de l'utilisateur"""
-
+    """Redirige selon le rôle de l'utilisateur"""
     def get(self, request):
         user = request.user
+        if user.is_authenticated and hasattr(user, 'role'):
+            if user.role == 'ADMIN':
+                return redirect('core:dashboard')
+            elif user.role == 'CASHIER':
+                return redirect('core:caisse')
+        return redirect('core:dashboard')
 
-        if user.is_authenticated:
-            if hasattr(user, 'role'):
-                if user.role == 'ADMIN':
-                    return redirect('core:dashboard')
-                elif user.role == 'CASHIER':
-                    return redirect('core:caisse')
-
-            # Par défaut, redirection vers dashboard
-            return redirect('core:dashboard')
-
-        return redirect('accounts:login')
-
-
-from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.urls import reverse_lazy
-from django.contrib import messages
-from django.db.models import Q
-from .models import Supplier
 
 class SupplierListView(LoginRequiredMixin, ListView):
-    """Vue liste des fournisseurs avec recherche et filtres"""
     model = Supplier
     template_name = 'accounts/suppliers/supplier_list.html'
     context_object_name = 'suppliers'
     paginate_by = 10
-    
+
     def get_queryset(self):
-        queryset = Supplier.objects.all()
-        
-        # Recherche
+        qs = Supplier.objects.all()
         search = self.request.GET.get('search')
         if search:
-            queryset = queryset.filter(
+            qs = qs.filter(
                 Q(name__icontains=search) |
                 Q(contact_person__icontains=search) |
                 Q(email__icontains=search) |
                 Q(city__icontains=search)
             )
-        
-        # Filtre par statut
         status = self.request.GET.get('status')
         if status:
-            queryset = queryset.filter(status=status)
-        
-        return queryset.order_by('-created_at')
-    
+            qs = qs.filter(status=status)
+        return qs.order_by('-created_at')
+
     def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['page_title'] = 'Gestion des Fournisseurs'
-        context['search_query'] = self.request.GET.get('search', '')
-        context['status_filter'] = self.request.GET.get('status', '')
-        context['status_choices'] = Supplier.Status.choices
-        
-        # Statistiques
-        context['total_suppliers'] = Supplier.objects.count()
-        context['active_suppliers'] = Supplier.objects.filter(status=Supplier.Status.ACTIVE).count()
-        context['inactive_suppliers'] = Supplier.objects.filter(status=Supplier.Status.INACTIVE).count()
-        context['suspended_suppliers'] = Supplier.objects.filter(status=Supplier.Status.SUSPENDED).count()
-        
-        return context
+        ctx = super().get_context_data(**kwargs)
+        ctx.update({
+            'page_title': 'Gestion des Fournisseurs',
+            'search_query': self.request.GET.get('search', ''),
+            'status_filter': self.request.GET.get('status', ''),
+            'status_choices': Supplier.Status.choices,
+            'total_suppliers': Supplier.objects.count(),
+            'active_suppliers': Supplier.objects.filter(status=Supplier.Status.ACTIVE).count(),
+            'inactive_suppliers': Supplier.objects.filter(status=Supplier.Status.INACTIVE).count(),
+            'suspended_suppliers': Supplier.objects.filter(status=Supplier.Status.SUSPENDED).count(),
+        })
+        return ctx
+
 
 class SupplierCreateView(LoginRequiredMixin, CreateView):
-    """Vue création d'un fournisseur"""
     model = Supplier
     template_name = 'core/suppliers/supplier_form.html'
     fields = [
-        'name', 'contact_person', 'email', 'phone', 
+        'name', 'contact_person', 'email', 'phone',
         'address', 'city', 'postal_code', 'country',
         'tax_number', 'payment_terms', 'credit_limit',
         'status', 'notes'
     ]
     success_url = reverse_lazy('core:supplier_list')
-    
+
     def form_valid(self, form):
         messages.success(self.request, f"Fournisseur '{form.instance.name}' créé avec succès.")
         return super().form_valid(form)
-    
+
     def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['page_title'] = 'Ajouter un Fournisseur'
-        context['form_title'] = 'Nouveau Fournisseur'
-        context['submit_text'] = 'Créer le Fournisseur'
-        return context
+        ctx = super().get_context_data(**kwargs)
+        ctx.update({
+            'page_title': 'Ajouter un Fournisseur',
+            'form_title': 'Nouveau Fournisseur',
+            'submit_text': 'Créer le Fournisseur'
+        })
+        return ctx
+
 
 class SupplierUpdateView(LoginRequiredMixin, UpdateView):
-    """Vue modification d'un fournisseur"""
     model = Supplier
     template_name = 'core/suppliers/supplier_form.html'
     fields = [
-        'name', 'contact_person', 'email', 'phone', 
+        'name', 'contact_person', 'email', 'phone',
         'address', 'city', 'postal_code', 'country',
         'tax_number', 'payment_terms', 'credit_limit',
         'status', 'notes'
     ]
     success_url = reverse_lazy('core:supplier_list')
-    
+
     def form_valid(self, form):
         messages.success(self.request, f"Fournisseur '{form.instance.name}' modifié avec succès.")
         return super().form_valid(form)
-    
+
     def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['page_title'] = f'Modifier {self.object.name}'
-        context['form_title'] = f'Modifier {self.object.name}'
-        context['submit_text'] = 'Sauvegarder les Modifications'
-        return context
+        ctx = super().get_context_data(**kwargs)
+        ctx.update({
+            'page_title': f"Modifier {self.object.name}",
+            'form_title': f"Modifier {self.object.name}",
+            'submit_text': 'Sauvegarder les Modifications'
+        })
+        return ctx
+
 
 class SupplierDetailView(LoginRequiredMixin, DetailView):
-    """Vue détail d'un fournisseur"""
     model = Supplier
     template_name = 'core/suppliers/supplier_detail.html'
     context_object_name = 'supplier'
-    
+
     def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['page_title'] = f'Détails - {self.object.name}'
-        return context
+        ctx = super().get_context_data(**kwargs)
+        ctx['page_title'] = f"Détails - {self.object.name}"
+        return ctx
+
 
 class SupplierDeleteView(LoginRequiredMixin, DeleteView):
-    """Vue suppression d'un fournisseur"""
     model = Supplier
     template_name = 'core/suppliers/supplier_confirm_delete.html'
     success_url = reverse_lazy('core:supplier_list')
-    
+
     def delete(self, request, *args, **kwargs):
-        supplier_name = self.get_object().name
-        result = super().delete(request, *args, **kwargs)
-        messages.success(request, f"Fournisseur '{supplier_name}' supprimé avec succès.")
-        return result
-    
+        name = self.get_object().name
+        res = super().delete(request, *args, **kwargs)
+        messages.success(request, f"Fournisseur '{name}' supprimé avec succès.")
+        return res
+
     def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['page_title'] = f'Supprimer {self.object.name}'
-        return context
+        ctx = super().get_context_data(**kwargs)
+        ctx['page_title'] = f"Supprimer {self.object.name}"
+        return ctx
+
+
+@login_required
+@csrf_exempt
+def caisse_checkout(request):
+    """Finalise la vente depuis la Caisse (AJAX)"""
+    if request.method != 'POST':
+        return JsonResponse({'success': False, 'error': 'Méthode non autorisée'}, status=405)
+    data = json.loads(request.body)
+    items = data.get('items', [])
+    payment_mode = data.get('payment_mode')
+    cash_received = data.get('cash_received', 0)
+
+    invoice = f"F{Sale.objects.count()+1:06d}"
+    sale = Sale.objects.create(
+        invoice_number=invoice,
+        cashier=request.user,
+        customer_name="Client",
+        status=Sale.Status.PAID,
+        total_amount=0
+    )
+    total = 0
+    for it in items:
+        prod = get_object_or_404(Product, pk=it['sku'])
+        qty = int(it['qty'])
+        up = float(it['price'])
+        line = SaleItem.objects.create(
+            sale=sale, product=prod, quantity=qty, unit_price=up
+        )
+        total += line.line_total
+
+    sale.total_amount = total
+    sale.save()
+    url = reverse_lazy('accounts:sale_detail', args=[sale.pk])
+    return JsonResponse({'success': True, 'redirect_url': str(url)})
