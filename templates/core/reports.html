@@ -1,0 +1,245 @@
+{% extends 'base.html' %}
+
+{% block title %}Rapports - Store Manager{% endblock %}
+
+{% block content %}
+<div class="container-fluid mt-4">
+  <!-- Header -->
+  <div class="d-flex justify-content-between align-items-center mb-2">
+    <h1 class="h3 mb-0 text-light">
+      <i class="fas fa-chart-pie text-light me-2"></i>Rapports
+    </h1>
+    <div>
+      <div class="btn-group me-2">
+        <button class="btn btn-outline-light dropdown-toggle" type="button" data-bs-toggle="dropdown">
+          <i class="fas fa-dollar-sign me-1"></i>Ventes
+        </button>
+        <ul class="dropdown-menu dropdown-menu-end">
+          <li><a class="dropdown-item" href="{% url 'accounts:export_sales_report_pdf' %}?start={{ start }}&end={{ end }}&category={{ selected_category }}"><i class="fas fa-file-pdf me-2 text-danger"></i>PDF</a></li>
+          <li><a class="dropdown-item" href="{% url 'accounts:export_sales_report_excel' %}?start={{ start }}&end={{ end }}&category={{ selected_category }}"><i class="fas fa-file-excel me-2 text-success"></i>Excel</a></li>
+          <li><a class="dropdown-item" href="{% url 'accounts:export_sales_report_docx' %}?start={{ start }}&end={{ end }}&category={{ selected_category }}"><i class="fas fa-file-word me-2 text-primary"></i>Word</a></li>
+          <li><a class="dropdown-item" href="{% url 'accounts:export_sales_report_csv' %}?start={{ start }}&end={{ end }}&category={{ selected_category }}"><i class="fas fa-file-csv me-2 text-secondary"></i>CSV</a></li>
+        </ul>
+      </div>
+      <div class="btn-group me-2">
+        <button class="btn btn-outline-light dropdown-toggle" type="button" data-bs-toggle="dropdown">
+          <i class="fas fa-boxes me-1"></i>Stocks
+        </button>
+        <ul class="dropdown-menu dropdown-menu-end">
+          <li><a class="dropdown-item" href="{% url 'accounts:export_stock_report_pdf' %}?category={{ selected_category }}"><i class="fas fa-file-pdf me-2 text-danger"></i>PDF</a></li>
+          <li><a class="dropdown-item" href="{% url 'accounts:export_stock_report_excel' %}?category={{ selected_category }}"><i class="fas fa-file-excel me-2 text-success"></i>Excel</a></li>
+          <li><a class="dropdown-item" href="{% url 'accounts:export_stock_report_docx' %}?category={{ selected_category }}"><i class="fas fa-file-word me-2 text-primary"></i>Word</a></li>
+          <li><a class="dropdown-item" href="{% url 'accounts:export_stock_report_csv' %}?category={{ selected_category }}"><i class="fas fa-file-csv me-2 text-secondary"></i>CSV</a></li>
+        </ul>
+      </div>
+      <a href="{% url 'core:dashboard' %}" class="btn btn-outline-light">
+        <i class="fas fa-arrow-left me-1"></i>Retour au dashboard
+      </a>
+    </div>
+  </div>
+
+  <p class="text-muted mb-4">Vue d'ensemble des données de votre magasin</p>
+
+  <!-- KPI Cards -->
+  <div class="row mb-4">
+    <div class="col-md-3">
+      <div class="card bg-primary text-white">
+        <div class="card-body">
+          <h4>{{ total_products }}</h4>
+          <p>Produits totaux</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card bg-success text-white">
+        <div class="card-body">
+          <h4>{{ active_products }}</h4>
+          <p>Produits actifs</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card bg-info text-white">
+        <div class="card-body">
+          <h4>{{ total_sales }}</h4>
+          <p>Ventes totales</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card bg-warning text-white">
+        <div class="card-body">
+          <h4>{{ total_revenue|floatformat:2 }}€</h4>
+          <p>Chiffre d'affaires</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Charts -->
+  <div class="row mb-5">
+    <div class="col-md-6">
+      <canvas id="salesTrendChart" style="height:250px;"></canvas>
+    </div>
+    <div class="col-md-6">
+      <canvas id="categoryPieChart" style="height:250px;"></canvas>
+    </div>
+  </div>
+
+  <!-- Filters + Search aligned right -->
+  <form method="get" class="row gx-3 gy-2 align-items-end mb-4">
+    <div class="col-auto">
+      <label class="form-label text-light">Du</label>
+      <input type="date" name="start" class="form-control" value="{{ start }}">
+    </div>
+    <div class="col-auto">
+      <label class="form-label text-light">Au</label>
+      <input type="date" name="end" class="form-control" value="{{ end }}">
+    </div>
+    <div class="col-auto">
+      <label class="form-label text-light">Catégorie</label>
+      <select name="category" class="form-select">
+        <option value="" {% if not selected_category %}selected{% endif %}>Toutes</option>
+        {% for cat in categories %}
+          <option value="{{ cat.id }}" {% if selected_category == cat.id|stringformat:"s" %}selected{% endif %}>{{ cat.name }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="col-auto">
+      <button type="submit" class="btn btn-primary">Appliquer</button>
+    </div>
+    <div class="col-auto ms-auto">
+      <label class="form-label text-light">Recherche en temps réel</label>
+      <input type="search" id="tableSearch" class="form-control" placeholder="Rechercher…" value="{{ request.GET.search }}">
+    </div>
+  </form>
+
+  <!-- Recent Sales -->
+  <div class="card">
+    <div class="card-header text-primary">
+      <i class="fas fa-list me-2 text-primary"></i>Ventes récentes
+    </div>
+    <div class="card-body p-0">
+      {% if recent_sales_page %}
+        <div class="table-responsive">
+          <table id="recentSales" class="table table-striped mb-0">
+            <thead>
+              <tr>
+                <th>N° Facture</th>
+                <th>Date</th>
+                <th>Caissier</th>
+                <th>Montant</th>
+                <th>Statut</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for sale in recent_sales_page %}
+              <tr>
+                <td>{{ sale.invoice_number }}</td>
+                <td>{{ sale.date|date:"d/m/Y H:i" }}</td>
+                <td>{{ sale.cashier.get_full_name }}</td>
+                <td>{{ sale.total_amount|floatformat:2 }}€</td>
+                <td><span class="badge bg-success">{{ sale.get_status_display }}</span></td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Django Pagination -->
+        <nav class="mt-3">
+          <ul class="pagination justify-content-center mb-0">
+            {% if recent_sales_page.has_previous %}
+              <li class="page-item">
+                <a class="page-link" href="?page={{ recent_sales_page.previous_page_number }}{% if start %}&start={{ start }}{% endif %}{% if end %}&end={{ end }}{% endif %}{% if selected_category %}&category={{ selected_category }}{% endif %}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}">&laquo; Précédent</a>
+              </li>
+            {% else %}
+              <li class="page-item disabled"><span class="page-link">&laquo; Précédent</span></li>
+            {% endif %}
+            {% for num in recent_sales_page.paginator.page_range %}
+              <li class="page-item{% if recent_sales_page.number == num %} active{% endif %}">
+                <a class="page-link" href="?page={{ num }}{% if start %}&start={{ start }}{% endif %}{% if end %}&end={{ end }}{% endif %}{% if selected_category %}&category={{ selected_category }}{% endif %}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}">{{ num }}</a>
+              </li>
+            {% endfor %}
+            {% if recent_sales_page.has_next %}
+              <li class="page-item">
+                <a class="page-link" href="?page={{ recent_sales_page.next_page_number }}{% if start %}&start={{ start }}{% endif %}{% if end %}&end={{ end }}{% endif %}{% if selected_category %}&category={{ selected_category }}{% endif %}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}">Suivant &raquo;</a>
+              </li>
+            {% else %}
+              <li class="page-item disabled"><span class="page-link">Suivant &raquo;</span></li>
+            {% endif %}
+          </ul>
+        </nav>
+      {% else %}
+        <p class="p-3 text-center text-muted">Aucune vente enregistrée pour le moment.</p>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+<!-- Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
+
+<script>
+  // Line Chart
+  new Chart(document.getElementById('salesTrendChart'), {
+    type: 'line',
+    data: {
+      labels: {{ sales_dates|safe }},
+      datasets: [{
+        label: 'CA TTC',
+        data: {{ sales_totals|safe }},
+        borderColor: 'rgba(75,192,192,1)',
+        backgroundColor: 'rgba(75,192,192,0.2)',
+        fill: true,
+        tension: 0.4
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      scales: {
+        x: { grid: { display: false } },
+        y: { beginAtZero: true, grid: { color: 'rgba(255,255,255,0.1)' } }
+      }
+    }
+  });
+
+  // Pie Chart
+  new Chart(document.getElementById('categoryPieChart'), {
+    type: 'pie',
+    data: {
+      labels: {{ category_labels|safe }},
+      datasets: [{
+        data: {{ category_counts|safe }},
+        backgroundColor: ['#4e73df','#1cc88a','#36b9cc','#f6c23e']
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { position: 'bottom', labels: { color: '#fff' } }
+      }
+    }
+  });
+
+  // DataTables + real-time external search
+  $(document).ready(function() {
+    var table = $('#recentSales').DataTable({
+      paging: false,
+      info: false,
+      ordering: true,
+      searching: true,
+      autoWidth: false,
+      dom: 't'
+    });
+    $('#tableSearch').on('input', function() {
+      table.search(this.value).draw();
+    });
+  });
+</script>
+{% endblock %}
