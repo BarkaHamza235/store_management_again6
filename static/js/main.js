@@ -201,13 +201,21 @@ function validateForm(formElement) {
 
 // Fonction pour afficher les notifications toast
 function showToast(message, type = 'info') {
+    // Icône selon le type
+    const iconMap = {
+        success: 'fa-check-circle',
+        danger:  'fa-exclamation-circle',
+        warning: 'fa-exclamation-triangle',
+        info:    'fa-info-circle'
+    };
+    const iconClass = iconMap[type] || iconMap.info;
+
     const toastHtml = `
-        <div class="toast align-items-center text-white bg-${type} border-0" role="alert">
+        <div class="toast show align-items-center text-white bg-${type} border-0 rounded-pill shadow-lg" role="alert" aria-live="assertive" aria-atomic="true">
             <div class="d-flex">
-                <div class="toast-body">
-                    ${message}
-                </div>
-                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+                <i class="fas ${iconClass} me-2 ms-3"></i>
+                <div class="toast-body me-3">${message}</div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Fermer"></button>
             </div>
         </div>
     `;
@@ -224,14 +232,14 @@ function showToast(message, type = 'info') {
     // Ajouter le toast
     toastContainer.insertAdjacentHTML('beforeend', toastHtml);
     const toastElement = toastContainer.lastElementChild;
-    const toast = new bootstrap.Toast(toastElement);
-    toast.show();
+    const bsToast = new bootstrap.Toast(toastElement, { delay: 5000 });
+    bsToast.show();
 
     // Supprimer le toast après fermeture
-    toastElement.addEventListener('hidden.bs.toast', function() {
-        this.remove();
-    });
+    toastElement.addEventListener('hidden.bs.toast', () => toastElement.remove());
 }
+
+
 
 // Fonction globale pour confirmer la déconnexion
 function confirmLogout() {

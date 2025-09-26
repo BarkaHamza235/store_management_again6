@@ -103,6 +103,16 @@ class Product(models.Model):
     def is_in_stock(self):
         return self.stock_quantity > 0 and self.status == self.Status.ACTIVE
 
+    def decrease_stock(self, quantity):
+        """Décrémente le stock de manière sécurisée"""
+        if self.stock_quantity >= quantity:
+            self.stock_quantity -= quantity
+            if self.stock_quantity == 0:
+                self.status = self.Status.OUT_OF_STOCK
+            self.save()
+            return True
+        return False
+
 
 class Sale(models.Model):
     """Modèle pour les ventes"""

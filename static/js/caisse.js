@@ -1,22 +1,22 @@
 // static/js/caisse.js
 
 document.addEventListener('DOMContentLoaded', function() {
-  const searchInput      = document.getElementById('product-search');
-  const searchBtn        = document.getElementById('search-btn');
-  const productList      = document.getElementById('product-list');
-  const cartList         = document.getElementById('cart-items');
-  const cartCount        = document.getElementById('cart-count');
-  const subtotalEl       = document.getElementById('cart-subtotal');
-  const taxEl            = document.getElementById('cart-tax');
-  const totalEl          = document.getElementById('cart-total');
-  const paymentModeBtns  = document.querySelectorAll('[name="payment_mode"]');
-  const cashFields       = document.getElementById('cash-fields');
-  const cashReceivedInput= document.getElementById('cash-received');
-  const finalizeBtn      = document.getElementById('finalize-sale');
-  const emptyCartBtn     = document.getElementById('empty-cart');
-  const genBtn           = document.getElementById('generate-invoice');
-  const printBtn         = document.getElementById('print-invoice');
-  let cart               = [];
+  const searchInput       = document.getElementById('product-search');
+  const searchBtn         = document.getElementById('search-btn');
+  const productList       = document.getElementById('product-list');
+  const cartList          = document.getElementById('cart-items');
+  const cartCount         = document.getElementById('cart-count');
+  const subtotalEl        = document.getElementById('cart-subtotal');
+  const taxEl             = document.getElementById('cart-tax');
+  const totalEl           = document.getElementById('cart-total');
+  const paymentModeBtns   = document.querySelectorAll('[name="payment_mode"]');
+  const cashFields        = document.getElementById('cash-fields');
+  const cashReceivedInput = document.getElementById('cash-received');
+  const finalizeBtn       = document.getElementById('finalize-sale');
+  const emptyCartBtn      = document.getElementById('empty-cart');
+  const genBtn            = document.getElementById('generate-invoice');
+  const printBtn          = document.getElementById('print-invoice');
+  let cart                = [];
 
   // Initialise états des boutons
   function initButtons() {
@@ -24,9 +24,9 @@ document.addEventListener('DOMContentLoaded', function() {
     finalizeBtn.classList.replace('btn-success', 'btn-secondary');
     finalizeBtn.innerHTML = '<i class="fas fa-check-circle"></i> Finaliser la vente';
     genBtn.disabled = true;
-    genBtn.classList.replace('btn-primary', 'btn-outline-secondary');
+    genBtn.classList.replace('btn-outline-primary', 'btn-outline-secondary');
     printBtn.disabled = true;
-    printBtn.classList.replace('btn-primary', 'btn-outline-secondary');
+    printBtn.classList.replace('btn-outline-primary', 'btn-outline-secondary');
   }
   initButtons();
 
@@ -51,8 +51,8 @@ document.addEventListener('DOMContentLoaded', function() {
   productList.addEventListener('click', function(e) {
     const btn = e.target.closest('.add-to-cart');
     if (!btn) return;
-    const sku = btn.dataset.sku;
-    const name = btn.dataset.name;
+    const sku   = btn.dataset.sku;
+    const name  = btn.dataset.name;
     const price = parseFloat(btn.dataset.price);
     const existing = cart.find(item => item.sku === sku);
     if (existing) existing.qty++;
@@ -84,7 +84,7 @@ document.addEventListener('DOMContentLoaded', function() {
   // Finaliser vente
   finalizeBtn.addEventListener('click', function() {
     if (cart.length === 0) {
-      alert('Le panier est vide.');
+      showToast('Le panier est vide.', 'danger');
       return;
     }
     const mode = document.querySelector('[name="payment_mode"]:checked').value;
@@ -92,7 +92,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (mode === 'CASH') {
       cashReceived = parseFloat(cashReceivedInput.value) || 0;
       if (cashReceived < calculateTotal()) {
-        alert('Montant en espèces insuffisant.');
+        showToast('Montant en espèces insuffisant.', 'danger');
         return;
       }
     }
@@ -105,74 +105,76 @@ document.addEventListener('DOMContentLoaded', function() {
       },
       body: JSON.stringify(data)
     })
-      .then(resp => resp.json())
-      .then(json => {
-        if (!json.success) {
-          return alert(json.error || 'Erreur lors de la finalisation.');
-        }
-        finalizeBtn.disabled = true;
-        finalizeBtn.classList.replace('btn-success', 'btn-secondary');
-        finalizeBtn.innerHTML = '<i class="fas fa-check-circle"></i> Vente finalisée';
-        finalizeBtn.dataset.saleId = json.sale_id;
-        genBtn.disabled = false;
-        genBtn.classList.replace('btn-outline-secondary', 'btn-primary');
-        printBtn.disabled = false;
-        printBtn.classList.replace('btn-outline-secondary', 'btn-primary');
-      })
-      .catch(err => {
-        console.error(err);
-        alert('Erreur réseau. Veuillez réessayer.');
-      });
+    .then(resp => resp.json())
+    .then(json => {
+      if (!json.success) {
+        showToast(json.error || 'Erreur lors de la finalisation.', 'danger');
+        return;
+      }
+      finalizeBtn.disabled = true;
+      finalizeBtn.classList.replace('btn-success', 'btn-secondary');
+      finalizeBtn.innerHTML = '<i class="fas fa-check-circle"></i> Vente finalisée';
+      finalizeBtn.dataset.saleId = json.sale_id;
+      // Activation des boutons Générer facture & Imprimer
+      genBtn.disabled = false;
+      genBtn.classList.replace('btn-outline-secondary', 'btn-primary');
+      genBtn.setAttribute('data-enabled', 'true');
+      printBtn.disabled = false;
+      printBtn.classList.replace('btn-outline-secondary', 'btn-primary');
+      printBtn.setAttribute('data-enabled', 'true');
+      showToast('Vente finalisée avec succès !', 'success');
+    })
+    .catch(err => {
+      console.error(err);
+      showToast('Erreur réseau. Veuillez réessayer.', 'danger');
+    });
   });
 
-  // Générer facture (affiche modal 5s)
+  // Générer facture
   genBtn.addEventListener('click', function() {
     const saleId = finalizeBtn.dataset.saleId;
-    if (!saleId) return alert('Aucune vente sélectionnée.');
+    if (!saleId) {
+      showToast('Aucune vente sélectionnée.', 'danger');
+      return;
+    }
     fetch(`/core/caisse/sale-info/?sale_id=${saleId}`)
-      .then(res => res.json())
-      .then(data => {
-        // Organisation du modal en tableau structuré
-        document.getElementById('modal-invoice-number').textContent = data.invoice_number;
-        document.getElementById('modal-invoice-date').textContent = data.date;
-        document.getElementById('modal-invoice-cashier').textContent = data.cashier;
-        document.getElementById('modal-invoice-customer').textContent = data.customer;
-        document.getElementById('modal-invoice-total').textContent = data.total_amount + ' €';
-        
-        // Créer tableau organisé pour les produits
-        const tbody = document.getElementById('modal-invoice-items');
-        tbody.innerHTML = '';
-        data.items.forEach(item => {
-          const tr = document.createElement('tr');
-          tr.innerHTML = `
-            <td>${item.product}</td>
-            <td class="text-center">${item.quantity}</td>
-            <td class="text-end">${(item.line_total / item.quantity).toFixed(2)} €</td>
-            <td class="text-end">${item.line_total} €</td>
-          `;
-          tbody.appendChild(tr);
-        });
-        
-        const invoiceModal = new bootstrap.Modal(document.getElementById('invoiceModal'));
-        invoiceModal.show();
-        setTimeout(() => invoiceModal.hide(), 5000);
-        finalizeBtn.disabled = false;
-        finalizeBtn.classList.replace('btn-secondary', 'btn-success');
-      })
-      .catch(err => {
-        console.error(err);
-        const invoiceModal = new bootstrap.Modal(document.getElementById('invoiceModal'));
-        invoiceModal.show();
-        setTimeout(() => invoiceModal.hide(), 5000);
-        finalizeBtn.disabled = false;
-        finalizeBtn.classList.replace('btn-secondary', 'btn-success');
+    .then(res => res.json())
+    .then(data => {
+      document.getElementById('modal-invoice-number').textContent = data.invoice_number;
+      document.getElementById('modal-invoice-date').textContent    = data.date;
+      document.getElementById('modal-invoice-cashier').textContent = data.cashier;
+      document.getElementById('modal-invoice-customer').textContent= data.customer;
+      document.getElementById('modal-invoice-total').textContent   = data.total_amount + ' €';
+      const tbody = document.getElementById('modal-invoice-items');
+      tbody.innerHTML = '';
+      data.items.forEach(item => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td>${item.product}</td>
+          <td class="text-center">${item.quantity}</td>
+          <td class="text-end">${(item.line_total/item.quantity).toFixed(2)} €</td>
+          <td class="text-end">${item.line_total} €</td>
+        `;
+        tbody.appendChild(tr);
       });
+      const invoiceModal = new bootstrap.Modal(document.getElementById('invoiceModal'));
+      invoiceModal.show();
+      showToast('Facture générée avec succès !', 'success');
+      setTimeout(() => invoiceModal.hide(), 5000);
+    })
+    .catch(err => {
+      console.error(err);
+      showToast('Erreur lors de la génération de la facture.', 'danger');
+    });
   });
 
   // Imprimer facture
   printBtn.addEventListener('click', function() {
     const saleId = finalizeBtn.dataset.saleId;
-    if (!saleId) return alert('Aucune vente sélectionnée.');
+    if (!saleId) {
+      showToast('Aucune vente sélectionnée.', 'danger');
+      return;
+    }
     window.open(`/core/caisse/generate-invoice/?sale_id=${saleId}`, '_blank');
     genBtn.disabled = true;
     genBtn.classList.replace('btn-primary', 'btn-outline-secondary');
@@ -188,7 +190,6 @@ document.addEventListener('DOMContentLoaded', function() {
     if (cart.length === 0) {
       cartList.innerHTML = '<li class="list-group-item text-center text-muted">Le panier est vide<br>Ajoutez des produits pour commencer</li>';
     } else {
-      // === Début insertion gestion quantités et suppression ===
       cart.forEach((item, idx) => {
         const li = document.createElement('li');
         li.className = 'list-group-item d-flex flex-column';
@@ -205,7 +206,6 @@ document.addEventListener('DOMContentLoaded', function() {
           </div>`;
         cartList.appendChild(li);
       });
-      // Gestion incrément/décrément
       document.querySelectorAll('.qty-btn').forEach(btn => {
         btn.addEventListener('click', e => {
           const idx = +btn.dataset.index;
@@ -214,7 +214,6 @@ document.addEventListener('DOMContentLoaded', function() {
           renderCart();
         });
       });
-      // Gestion saisie directe
       document.querySelectorAll('.qty-input').forEach(input => {
         input.addEventListener('change', e => {
           const idx = +e.target.dataset.index;
@@ -222,24 +221,21 @@ document.addEventListener('DOMContentLoaded', function() {
           renderCart();
         });
       });
-      // Gestion suppression
       document.querySelectorAll('.remove-btn').forEach(btn => {
         btn.addEventListener('click', e => {
           cart.splice(+btn.dataset.index, 1);
           renderCart();
         });
       });
-      // === Fin insertion ===
     }
     cartCount.textContent = cart.reduce((sum, i) => sum + i.qty, 0);
     const subtotal = cart.reduce((sum, i) => sum + i.price * i.qty, 0);
-    const tax = subtotal * 0.2;
-    const total = subtotal + tax;
+    const tax      = subtotal * 0.2;
+    const total    = subtotal + tax;
     subtotalEl.textContent = subtotal.toFixed(2) + ' €';
-    taxEl.textContent    = tax.toFixed(2) + ' €';
-    totalEl.textContent  = total.toFixed(2) + ' €';
+    taxEl.textContent      = tax.toFixed(2) + ' €';
+    totalEl.textContent    = total.toFixed(2) + ' €';
 
-    // Active Finaliser si articles présents
     if (cart.length > 0) {
       finalizeBtn.disabled = false;
       finalizeBtn.classList.replace('btn-secondary', 'btn-success');
@@ -251,7 +247,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   function calculateTotal() {
     const sub = parseFloat(subtotalEl.textContent) || 0;
-    const tax = parseFloat(taxEl.textContent) || 0;
+    const tax = parseFloat(taxEl.textContent)    || 0;
     return sub + tax;
   }
 

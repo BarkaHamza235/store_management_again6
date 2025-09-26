@@ -24,14 +24,13 @@
 
   <style>
     .subtitle {
-    display: block;
-    font-size: 0.85rem;      /* Plus petit que le titre */
-    text-align: center;      /* Centré sous le titre */
-    color: #333;             /* Ajustez la couleur si besoin */
-    margin-top: 0.25rem;     /* Petit écart par rapport au titre */
-  }
+      display: block;
+      font-size: 0.85rem;
+      text-align: center;
+      color: #333;
+      margin-top: 0.25rem;
+    }
   </style>
-  
 
   <div class="row">
     <!-- Colonne Recherche + Produits -->
@@ -156,7 +155,7 @@
               {% if products_page.has_previous %}
                 <li class="page-item">
                   <a class="page-link"
-                     href="?{% if search_query %}q={{ search_query }}&{% endif %}{% if selected_category %}category={{ selected_category }}&{% endif %}page={{ products_page.previous_page_number }}">
+                    href="?{% if search_query %}q={{ search_query }}&{% endif %}{% if selected_category %}category={{ selected_category }}&{% endif %}page={{ products_page.previous_page_number }}">
                     &laquo;
                   </a>
                 </li>
@@ -180,7 +179,7 @@
               {% if products_page.has_next %}
                 <li class="page-item">
                   <a class="page-link"
-                     href="?{% if search_query %}q={{ search_query }}&{% endif %}{% if selected_category %}category={{ selected_category }}&{% endif %}page={{ products_page.next_page_number }}">
+                    href="?{% if search_query %}q={{ search_query }}&{% endif %}{% if selected_category %}category={{ selected_category }}&{% endif %}page={{ products_page.next_page_number }}">
                     &raquo;
                   </a>
                 </li>
@@ -226,22 +225,26 @@
           <label class="form-label">Espèces reçues</label>
           <input id="cash-received" type="number" min="0" step="0.01" class="form-control" placeholder="0.00">
         </div>
-        <button id="finalize-sale" type="button" class="btn btn-success w-100 mb-2"><i class="fas fa-check-circle"></i> Finaliser la vente</button>
-        <button id="generate-invoice" type="button" class="btn btn-outline-secondary w-100 mb-2" disabled><i class="fas fa-file-invoice"></i> Générer facture</button>
-        <button id="print-invoice" type="button" class="btn btn-outline-secondary w-100 mb-2" disabled><i class="fas fa-print"></i> Imprimer</button>
+        <button id="finalize-sale" type="button" class="btn btn-success w-100 mb-2" disabled>
+          <i class="fas fa-check-circle"></i> Finaliser la vente
+        </button>
+        <button id="generate-invoice" type="button" class="btn btn-outline-secondary w-100 mb-2" disabled>
+          <i class="fas fa-file-invoice"></i> Générer facture
+        </button>
+        <button id="print-invoice" type="button" class="btn btn-outline-secondary w-100 mb-2" disabled>
+          <i class="fas fa-print"></i> Imprimer
+        </button>
       </div>
     </div>
   </div>
 
   <footer class="glass p-3 text-center mt-4">
-  <small class="text-muted">
-    Copyright <strong>©</strong> 2025 <strong>BHB-Magasin</strong>•All Rights Reserved | 
-    Développé par <strong>Hamza Barka</strong>• Version 1.0
-  </small>
-</footer>
-
+    <small class="text-muted">
+      Copyright <strong>©</strong> 2025 <strong>BHB-Magasin</strong>•All Rights Reserved | 
+      Développé par <strong>Hamza Barka</strong>• Version 1.0
+    </small>
+  </footer>
 </div>
-
 {% endblock %}
 
 {% block extra_css %}
@@ -252,7 +255,7 @@
     height: 80px;
     border-radius: 50%;
     overflow: hidden;
-    border: 2px solid #667eea;  /*cercle: Nouveau bleu pastel */
+    border: 2px solid #667eea;
   }
   .product-img-circle img {
     width: 100%;
@@ -262,14 +265,14 @@
 
   /* Couleur de fond et bordure des cartes produits */
   #product-list .card {
-    background-color: #fff5f0;  /* Pêche très clair */
-    border: 1px solid #ffd6cc;   /* Liseré pêche pâle */
+    background-color: #fff5f0;
+    border: 1px solid #ffd6cc;
     transition: transform .2s, box-shadow .2s, background-color .2s, border-color .2s;
   }
 
   /* Effet au survol */
   #product-list .card:hover {
-    background-color: #ffe8e0;   /* Pêche claire */
+    background-color: #ffe8e0;
     border-color: #ffb3a7;
     transform: translateY(-4px);
     box-shadow: 0 8px 16px rgba(0,0,0,0.1);
@@ -277,16 +280,15 @@
 
   /* Texte dans les cartes pour meilleur contraste */
   #product-list .card-title {
-    color: #1e3a8a;              /* Bleu foncé */
+    color: #1e3a8a;
   }
 
   /* Prix en vert foncé */
   #product-list .card-text {
-    color: #2f855a;              /* Vert foncé */
+    color: #2f855a;
     font-weight: 600;
   }
 </style>
-
 {% endblock %}
 
 {% block extra_js %}
@@ -305,6 +307,7 @@
     </div>
   </div>
 </div>
+
 <script src="{% static 'js/caisse.js' %}"></script>
 
 <!-- Modal Facture -->

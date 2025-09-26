@@ -258,6 +258,16 @@ def caisse_checkout(request):
     payment_mode = data.get('payment_mode')
     cash_received = data.get('cash_received', 0)
 
+    # Vérification du stock avant création de la vente
+    for it in items:
+        prod = get_object_or_404(Product, pk=it['sku'])
+        qty = int(it['qty'])
+        if prod.stock_quantity < qty:
+            return JsonResponse({
+                'success': False, 
+                'error': f"Stock insuffisant pour {prod.name}. Stock disponible: {prod.stock_quantity}"
+            })
+
     # Utilisation du générateur de numéro unique
     invoice = generate_invoice_number()
     
@@ -281,6 +291,8 @@ def caisse_checkout(request):
             unit_price=up
         )
         total += line.line_total
+        # Mise à jour du stock
+        prod.decrease_stock(qty)
 
     sale.total_amount = total
     sale.save()
@@ -298,6 +310,7 @@ def caisse_checkout(request):
         'message': f"Vente {invoice} enregistrée avec succès !",
         'toast_type': 'success'
     })
+
 
 
 @login_required
@@ -479,8 +492,8 @@ class ReportsView(LoginRequiredMixin, TemplateView):
         # Répartition des produits par catégorie
         cats = Category.objects.all().order_by('name')
         counts = Product.objects.values('category__name') \
-                    .annotate(count=Count('id')) \
-                    .order_by('category__name')
+            .annotate(count=Count('id')) \
+            .order_by('category__name')
         ctx['category_labels'] = json.dumps([c['category__name'] for c in counts])
         ctx['category_counts'] = json.dumps([c['count'] for c in counts])
 

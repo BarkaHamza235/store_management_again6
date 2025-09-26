@@ -9683,3 +9683,69 @@ INFO 2025-08-17 05:19:44,783 autoreload 17012 15336 Watching for file changes wi
 INFO 2025-08-24 02:27:31,588 autoreload 2944 17924 Watching for file changes with StatReloader
 INFO 2025-08-29 15:56:45,881 autoreload 1596 6044 Watching for file changes with StatReloader
 INFO 2025-08-29 16:20:52,146 autoreload 12224 9808 Watching for file changes with StatReloader
+INFO 2025-08-29 16:44:37,055 autoreload 11448 13068 Watching for file changes with StatReloader
+INFO 2025-08-29 16:46:17,336 autoreload 12088 10216 Watching for file changes with StatReloader
+INFO 2025-08-29 16:47:17,732 autoreload 10632 18308 Watching for file changes with StatReloader
+INFO 2025-08-29 17:26:44,580 autoreload 10280 1240 Watching for file changes with StatReloader
+INFO 2025-08-29 17:28:57,471 autoreload 6104 2012 Watching for file changes with StatReloader
+INFO 2025-08-29 17:52:23,516 autoreload 16620 18680 Watching for file changes with StatReloader
+INFO 2025-08-29 18:05:42,074 autoreload 8804 18348 Watching for file changes with StatReloader
+INFO 2025-08-29 18:08:21,240 autoreload 4040 2456 Watching for file changes with StatReloader
+INFO 2025-08-30 21:01:47,076 autoreload 18812 8624 Watching for file changes with StatReloader
+INFO 2025-08-30 21:56:38,451 autoreload 7132 18980 Watching for file changes with StatReloader
+INFO 2025-08-30 22:09:05,331 autoreload 14480 19852 Watching for file changes with StatReloader
+ERROR 2025-08-30 22:13:30,645 log 14480 15512 Internal Server Error: /accounts/products/2/delete/
+Traceback (most recent call last):
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again - Copie\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again - Copie\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again - Copie\venv\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again - Copie\venv\Lib\site-packages\django\contrib\auth\mixins.py", line 73, in dispatch
+    return super().dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again - Copie\venv\Lib\site-packages\django\contrib\auth\mixins.py", line 135, in dispatch
+    return super().dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again - Copie\venv\Lib\site-packages\django\views\generic\base.py", line 143, in dispatch
+    return handler(request, *args, **kwargs)
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again - Copie\venv\Lib\site-packages\django\views\generic\edit.py", line 258, in post
+    return self.form_valid(form)
+           ~~~~~~~~~~~~~~~^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again - Copie\venv\Lib\site-packages\django\views\generic\edit.py", line 264, in form_valid
+    self.object.delete()
+    ~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again - Copie\venv\Lib\site-packages\django\db\models\base.py", line 1280, in delete
+    collector.collect([self], keep_parents=keep_parents)
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Downloads\store_manager_project_with_password_reset_again - Copie\venv\Lib\site-packages\django\db\models\deletion.py", line 350, in collect
+    raise ProtectedError(
+    ...<7 lines>...
+    )
+django.db.models.deletion.ProtectedError: ("Cannot delete some instances of model 'Product' because they are referenced through protected foreign keys: 'SaleItem.product'.", {<SaleItem: A 15 x1>, <SaleItem: A 15 x1>, <SaleItem: A 15 x1>, <SaleItem: A 15 x1>, <SaleItem: A 15 x1>, <SaleItem: A 15 x1>, <SaleItem: A 15 x1>, <SaleItem: A 15 x1>, <SaleItem: A 15 x1>, <SaleItem: A 15 x1>, <SaleItem: A 15 x1>, <SaleItem: A 15 x1>, <SaleItem: A 15 x2>, <SaleItem: A 15 x20>, <SaleItem: A 15 x17>})
+INFO 2025-08-30 22:24:12,483 autoreload 2936 18920 Watching for file changes with StatReloader
+INFO 2025-08-30 22:29:21,577 autoreload 20108 18652 Watching for file changes with StatReloader
+INFO 2025-08-30 23:12:19,364 autoreload 10384 17744 Watching for file changes with StatReloader
+INFO 2025-08-30 23:36:32,593 autoreload 6532 11432 Watching for file changes with StatReloader
+INFO 2025-08-30 23:57:55,059 autoreload 1508 4544 Watching for file changes with StatReloader
+INFO 2025-08-31 00:16:21,575 autoreload 17508 9732 Watching for file changes with StatReloader
+INFO 2025-08-31 00:17:33,419 autoreload 3792 16900 Watching for file changes with StatReloader
+INFO 2025-08-31 00:19:03,152 autoreload 12912 9908 Watching for file changes with StatReloader
+INFO 2025-08-31 00:20:02,315 autoreload 10676 7352 Watching for file changes with StatReloader
+INFO 2025-08-31 00:52:23,216 autoreload 7704 3396 Watching for file changes with StatReloader
+INFO 2025-08-31 00:53:54,178 autoreload 2924 18496 Watching for file changes with StatReloader
+INFO 2025-08-31 20:45:45,175 autoreload 9020 17016 Watching for file changes with StatReloader
+INFO 2025-08-31 21:08:42,014 autoreload 19116 7428 Watching for file changes with StatReloader
+INFO 2025-08-31 21:27:41,714 autoreload 3936 19096 Watching for file changes with StatReloader
+INFO 2025-08-31 21:40:18,625 autoreload 13152 12888 Watching for file changes with StatReloader
+INFO 2025-09-01 00:25:49,997 autoreload 12760 8724 Watching for file changes with StatReloader
+INFO 2025-09-01 00:27:14,196 autoreload 20244 4160 Watching for file changes with StatReloader
+INFO 2025-09-01 00:29:36,184 autoreload 17280 17300 Watching for file changes with StatReloader
+INFO 2025-09-01 01:23:46,689 autoreload 10560 9372 Watching for file changes with StatReloader
+INFO 2025-09-05 22:00:53,988 autoreload 17784 9580 Watching for file changes with StatReloader
+WARNING 2025-09-05 22:01:01,138 log 17784 6724 Not Found: /favicon.ico
+INFO 2025-09-26 19:54:14,465 autoreload 9660 5844 Watching for file changes with StatReloader
+WARNING 2025-09-26 19:54:42,000 log 9660 2624 Not Found: /favicon.ico
+WARNING 2025-09-26 19:55:48,171 log 9660 9752 Not Found: /favicon.ico
